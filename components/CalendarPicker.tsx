@@ -48,7 +48,6 @@ export function CalendarPicker({
 }: CalendarPickerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const nativeInputRef = useRef<HTMLInputElement>(null);
 
   // Parse currently selected date
   const parsedDate = useMemo(() => {
@@ -206,15 +205,7 @@ export function CalendarPicker({
       {/* Trigger Button that opens calendar */}
       <button
         type="button"
-        onClick={() => {
-          setIsOpen(!isOpen);
-          try {
-            // Also invoke browser picker if supported
-            nativeInputRef.current?.showPicker?.();
-          } catch {
-            // Ignore if showPicker fails
-          }
-        }}
+        onClick={() => setIsOpen(!isOpen)}
         className={cn(
           "w-full flex items-center justify-between gap-2 rounded-lg border text-left transition-all shadow-sm",
           size === "sm"
@@ -237,14 +228,11 @@ export function CalendarPicker({
         </span>
       </button>
 
-      {/* Hidden input for standard forms accessibility */}
+      {/* Hidden input for standard forms accessibility without invoking system picker */}
       <input
-        ref={nativeInputRef}
-        type="date"
+        type="hidden"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="sr-only"
-        tabIndex={-1}
       />
 
       {/* Interactive Apple-Style Calendar Dropdown */}
