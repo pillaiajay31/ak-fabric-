@@ -16,6 +16,19 @@ KnitFlow is a modern, minimalist production and dispatch management platform bui
   - Pre-seeded with clients such as **M/S Pooja Shree Silk & Synthetic (Bhiwandi)**.
 - **Company Profile (`/masters/company`)**:
   - Centralized setup for A.K. Fabric (GSTIN: `26AGHPP8818L1ZQ`, Silvassa jurisdiction, Bank of Baroda account & IFSC details, default HSN/SAC `998821`, default job work rate `Rs. 42/KG`).
+- **User Master & Access Control (`/masters/users`)**:
+  - Full management of mill staff and administrator accounts.
+  - Granular role-based permissions (Administrator, Production Supervisor, Finance & Dispatch, Machine Operator, or Custom).
+  - Configurable access toggles across Production, Finance, and Master workspaces.
+  - Instant account activation/deactivation and password resets.
+
+### 2. Authentication & Access Control (`/login`)
+- **Protected Access**: All platform routes are secured; unauthorized visitors are redirected to the login portal.
+- **Role-Based Navigation**: Dropdown navigation and mobile bottom docks dynamically adapt, displaying only the modules the authenticated user is permitted to use.
+- **Default Pre-Seeded Accounts**:
+  - **Admin**: Username: `admin` | Password: `admin` (Full access to all modules)
+  - **Supervisor**: Username: `supervisor` | Password: `supervisor` (Production Dashboard, Roll Entry, Rejections, Machine Master)
+  - **Operator**: Username: `operator` | Password: `operator` (Floor Roll Entry only)
 
 ### 2. Summary Dashboard (`/`)
 - **Today's Overall Production**: Total weight (KG) and roll count produced today across all machines.
