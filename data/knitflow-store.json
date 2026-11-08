@@ -2155,5 +2155,71 @@
       "id": "inv-1794112729060",
       "createdAt": "2026-11-08T04:38:49.060Z"
     }
+  ],
+  "users": [
+    {
+      "id": "usr-admin",
+      "username": "admin",
+      "password": "admin",
+      "fullName": "A.K. Administrator",
+      "role": "admin",
+      "permissions": {
+        "productionDashboard": true,
+        "productionRollEntry": true,
+        "productionRejection": true,
+        "financeView": true,
+        "financeCreate": true,
+        "masterMachines": true,
+        "masterCustomers": true,
+        "masterCompany": true,
+        "masterUsers": true
+      },
+      "isActive": true,
+      "phone": "+91 98251 12345",
+      "createdAt": "2026-01-01T00:00:00Z",
+      "lastLoginAt": "2026-11-08T10:19:31.826Z"
+    },
+    {
+      "id": "usr-supervisor",
+      "username": "supervisor",
+      "password": "supervisor",
+      "fullName": "Production Supervisor",
+      "role": "supervisor",
+      "permissions": {
+        "productionDashboard": true,
+        "productionRollEntry": true,
+        "productionRejection": true,
+        "financeView": false,
+        "financeCreate": false,
+        "masterMachines": true,
+        "masterCustomers": false,
+        "masterCompany": false,
+        "masterUsers": false
+      },
+      "isActive": true,
+      "phone": "+91 98251 55667",
+      "createdAt": "2026-01-01T00:00:00Z"
+    },
+    {
+      "id": "usr-operator",
+      "username": "operator",
+      "password": "operator",
+      "fullName": "Mill Operator",
+      "role": "operator",
+      "permissions": {
+        "productionDashboard": false,
+        "productionRollEntry": true,
+        "productionRejection": false,
+        "financeView": false,
+        "financeCreate": false,
+        "masterMachines": false,
+        "masterCustomers": false,
+        "masterCompany": false,
+        "masterUsers": false
+      },
+      "isActive": true,
+      "createdAt": "2026-01-01T00:00:00Z",
+      "lastLoginAt": "2026-11-08T10:19:39.604Z"
+    }
   ]
 }

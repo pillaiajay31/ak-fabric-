@@ -27,6 +27,8 @@ import {
 } from "recharts";
 import { formatIndianCurrency, formatDateIndian } from "@/lib/utils";
 import { CalendarPicker } from "@/components/CalendarPicker";
+import { useAuth } from "@/components/AuthProvider";
+import { AccessDenied } from "@/components/AccessDenied";
 
 type DatePreset = "today" | "yesterday" | "last7" | "thisMonth" | "custom";
 
@@ -88,6 +90,7 @@ interface DashboardData {
 }
 
 export function DashboardClient() {
+  const { hasPermission, loading: authLoading } = useAuth();
   const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [preset, setPreset] = useState<DatePreset>("today");
@@ -190,6 +193,15 @@ export function DashboardClient() {
       fetchDashboard(start, newEnd);
     });
   };
+
+  if (!authLoading && !hasPermission("productionDashboard")) {
+    return (
+      <AccessDenied
+        requiredPermission="productionDashboard"
+        moduleName="Summary Dashboard"
+      />
+    );
+  }
 
   if (loading && !data) {
     return (

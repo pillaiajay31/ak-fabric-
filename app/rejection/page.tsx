@@ -12,6 +12,8 @@ import {
 import { RejectionLog, Machine } from "@/lib/types";
 import { formatIndianCurrency } from "@/lib/utils";
 import { CalendarPicker } from "@/components/CalendarPicker";
+import { useAuth } from "@/components/AuthProvider";
+import { AccessDenied } from "@/components/AccessDenied";
 
 const DEFECT_REASONS = [
   "Oil Stain",
@@ -27,6 +29,7 @@ const DEFECT_REASONS = [
 const ACTIONS = ["Scrap", "Recycled", "B-Grade Sale"] as const;
 
 export default function RejectionPage() {
+  const { hasPermission, loading: authLoading } = useAuth();
   const [rejections, setRejections] = useState<RejectionLog[]>([]);
   const [machines, setMachines] = useState<Machine[]>([]);
   const [loading, setLoading] = useState(true);
@@ -147,6 +150,15 @@ export default function RejectionPage() {
     if (filterMachine === "ALL") return rejections;
     return rejections.filter((r) => r.machineCode === filterMachine);
   }, [rejections, filterMachine]);
+
+  if (!authLoading && !hasPermission("productionRejection")) {
+    return (
+      <AccessDenied
+        requiredPermission="productionRejection"
+        moduleName="Fabric Rejection & Defect Log"
+      />
+    );
+  }
 
   return (
     <div className="space-y-8">

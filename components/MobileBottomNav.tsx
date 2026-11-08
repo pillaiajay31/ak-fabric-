@@ -10,48 +10,66 @@ import {
   Settings,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-const mobileTabs = [
-  {
-    name: "Summary",
-    href: "/",
-    icon: LayoutDashboard,
-    isActive: (p: string) => p === "/",
-  },
-  {
-    name: "Roll Entry",
-    href: "/production",
-    icon: Layers,
-    isActive: (p: string) => p.startsWith("/production"),
-  },
-  {
-    name: "Rejections",
-    href: "/rejection",
-    icon: AlertOctagon,
-    isActive: (p: string) => p.startsWith("/rejection"),
-  },
-  {
-    name: "Finance",
-    href: "/dispatch",
-    icon: FileSpreadsheet,
-    isActive: (p: string) => p.startsWith("/dispatch"),
-  },
-  {
-    name: "Masters",
-    href: "/masters/machines",
-    icon: Settings,
-    isActive: (p: string) => p.startsWith("/masters"),
-  },
-];
+import { useAuth } from "./AuthProvider";
 
 export function MobileBottomNav() {
   const pathname = usePathname();
+  const { user, hasPermission } = useAuth();
 
-  // Hide on print
+  // Hide on login page or print mode
+  if (pathname === "/login") {
+    return null;
+  }
+
+  const allTabs = [
+    {
+      name: "Summary",
+      href: "/",
+      icon: LayoutDashboard,
+      isActive: (p: string) => p === "/",
+      visible: hasPermission("productionDashboard"),
+    },
+    {
+      name: "Roll Entry",
+      href: "/production",
+      icon: Layers,
+      isActive: (p: string) => p.startsWith("/production"),
+      visible: hasPermission("productionRollEntry"),
+    },
+    {
+      name: "Rejections",
+      href: "/rejection",
+      icon: AlertOctagon,
+      isActive: (p: string) => p.startsWith("/rejection"),
+      visible: hasPermission("productionRejection"),
+    },
+    {
+      name: "Finance",
+      href: "/dispatch",
+      icon: FileSpreadsheet,
+      isActive: (p: string) => p.startsWith("/dispatch"),
+      visible: hasPermission("financeView"),
+    },
+    {
+      name: "Masters",
+      href: "/masters/machines",
+      icon: Settings,
+      isActive: (p: string) => p.startsWith("/masters"),
+      visible:
+        hasPermission("masterMachines") ||
+        hasPermission("masterCustomers") ||
+        hasPermission("masterCompany") ||
+        hasPermission("masterUsers"),
+    },
+  ];
+
+  const visibleTabs = allTabs.filter((t) => t.visible);
+  if (visibleTabs.length === 0) return null;
+
   return (
     <div className="print:hidden md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-md border-t border-neutral-200 dark:border-neutral-800 px-2 py-1 shadow-lg">
       <nav className="flex items-center justify-around">
-        {mobileTabs.map((tab) => {
+        {visibleTabs.map((tab) => {
           const Icon = tab.icon;
           const active = tab.isActive(pathname);
 
@@ -86,4 +104,3 @@ export function MobileBottomNav() {
     </div>
   );
 }
-

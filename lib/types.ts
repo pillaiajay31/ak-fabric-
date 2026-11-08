@@ -142,3 +142,97 @@ export interface TaxInvoice {
   createdAt: string;
 }
 
+export type UserRole = "admin" | "supervisor" | "finance" | "operator" | "custom";
+
+export interface UserPermissions {
+  productionDashboard: boolean;
+  productionRollEntry: boolean;
+  productionRejection: boolean;
+  financeView: boolean;
+  financeCreate: boolean;
+  masterMachines: boolean;
+  masterCustomers: boolean;
+  masterCompany: boolean;
+  masterUsers: boolean;
+}
+
+export interface UserAccount {
+  id: string;
+  username: string;
+  password?: string;
+  fullName: string;
+  role: UserRole;
+  permissions: UserPermissions;
+  isActive: boolean;
+  phone?: string;
+  createdAt: string;
+  lastLoginAt?: string;
+}
+
+export interface SessionUser {
+  id: string;
+  username: string;
+  fullName: string;
+  role: UserRole;
+  permissions: UserPermissions;
+}
+
+export const ROLE_PRESETS: Record<UserRole, UserPermissions> = {
+  admin: {
+    productionDashboard: true,
+    productionRollEntry: true,
+    productionRejection: true,
+    financeView: true,
+    financeCreate: true,
+    masterMachines: true,
+    masterCustomers: true,
+    masterCompany: true,
+    masterUsers: true,
+  },
+  supervisor: {
+    productionDashboard: true,
+    productionRollEntry: true,
+    productionRejection: true,
+    financeView: false,
+    financeCreate: false,
+    masterMachines: true,
+    masterCustomers: false,
+    masterCompany: false,
+    masterUsers: false,
+  },
+  finance: {
+    productionDashboard: true,
+    productionRollEntry: false,
+    productionRejection: false,
+    financeView: true,
+    financeCreate: true,
+    masterMachines: false,
+    masterCustomers: true,
+    masterCompany: false,
+    masterUsers: false,
+  },
+  operator: {
+    productionDashboard: false,
+    productionRollEntry: true,
+    productionRejection: false,
+    financeView: false,
+    financeCreate: false,
+    masterMachines: false,
+    masterCustomers: false,
+    masterCompany: false,
+    masterUsers: false,
+  },
+  custom: {
+    productionDashboard: false,
+    productionRollEntry: true,
+    productionRejection: false,
+    financeView: false,
+    financeCreate: false,
+    masterMachines: false,
+    masterCustomers: false,
+    masterCompany: false,
+    masterUsers: false,
+  },
+};
+
+

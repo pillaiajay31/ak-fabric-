@@ -15,9 +15,12 @@ import {
 import { Customer, ProductionRoll, Machine } from "@/lib/types";
 import { formatIndianCurrency } from "@/lib/utils";
 import { CalendarPicker } from "@/components/CalendarPicker";
+import { useAuth } from "@/components/AuthProvider";
+import { AccessDenied } from "@/components/AccessDenied";
 
 export default function NewDispatchPage() {
   const router = useRouter();
+  const { hasPermission, loading: authLoading } = useAuth();
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [machines, setMachines] = useState<Machine[]>([]);
   const [rolls, setRolls] = useState<ProductionRoll[]>([]);
@@ -245,6 +248,15 @@ export default function NewDispatchPage() {
       setSubmitting(false);
     }
   };
+
+  if (!authLoading && !hasPermission("financeCreate")) {
+    return (
+      <AccessDenied
+        requiredPermission="financeCreate"
+        moduleName="Create New Dispatch"
+      />
+    );
+  }
 
   return (
     <div className="space-y-8">

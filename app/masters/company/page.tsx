@@ -3,8 +3,11 @@
 import { useEffect, useState } from "react";
 import { Building2, Save, Check } from "lucide-react";
 import { CompanyProfile } from "@/lib/types";
+import { useAuth } from "@/components/AuthProvider";
+import { AccessDenied } from "@/components/AccessDenied";
 
 export default function CompanyMasterPage() {
+  const { hasPermission, loading: authLoading } = useAuth();
   const [profile, setProfile] = useState<CompanyProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -51,6 +54,15 @@ export default function CompanyMasterPage() {
       setSaving(false);
     }
   };
+
+  if (!authLoading && !hasPermission("masterCompany")) {
+    return (
+      <AccessDenied
+        requiredPermission="masterCompany"
+        moduleName="Company Profile"
+      />
+    );
+  }
 
   if (loading || !profile) {
     return (

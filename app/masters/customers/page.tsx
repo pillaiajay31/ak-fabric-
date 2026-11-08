@@ -14,8 +14,11 @@ import {
   Mail,
 } from "lucide-react";
 import { Customer } from "@/lib/types";
+import { useAuth } from "@/components/AuthProvider";
+import { AccessDenied } from "@/components/AccessDenied";
 
 export default function CustomerMasterPage() {
+  const { hasPermission, loading: authLoading } = useAuth();
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -173,6 +176,15 @@ export default function CustomerMasterPage() {
       c.city.toLowerCase().includes(q)
     );
   });
+
+  if (!authLoading && !hasPermission("masterCustomers")) {
+    return (
+      <AccessDenied
+        requiredPermission="masterCustomers"
+        moduleName="Customer Master"
+      />
+    );
+  }
 
   return (
     <div className="space-y-8">

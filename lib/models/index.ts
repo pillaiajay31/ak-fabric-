@@ -168,6 +168,36 @@ const CompanySchema = new Schema(
   { timestamps: true }
 );
 
+const UserSchema = new Schema(
+  {
+    username: { type: String, required: true, unique: true, lowercase: true, trim: true },
+    password: { type: String, required: true },
+    fullName: { type: String, required: true },
+    role: {
+      type: String,
+      enum: ["admin", "supervisor", "finance", "operator", "custom"],
+      default: "operator",
+    },
+    permissions: {
+      productionDashboard: { type: Boolean, default: false },
+      productionRollEntry: { type: Boolean, default: true },
+      productionRejection: { type: Boolean, default: false },
+      financeView: { type: Boolean, default: false },
+      financeCreate: { type: Boolean, default: false },
+      masterMachines: { type: Boolean, default: false },
+      masterCustomers: { type: Boolean, default: false },
+      masterCompany: { type: Boolean, default: false },
+      masterUsers: { type: Boolean, default: false },
+    },
+    isActive: { type: Boolean, default: true },
+    phone: { type: String },
+    lastLoginAt: { type: String },
+  },
+  { timestamps: true }
+);
+
+export const UserModel =
+  mongoose.models.User || mongoose.model("User", UserSchema);
 export const CompanyModel =
   mongoose.models.Company || mongoose.model("Company", CompanySchema);
 export const MachineModel =

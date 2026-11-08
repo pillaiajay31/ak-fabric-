@@ -16,8 +16,11 @@ import {
 import { ProductionRoll, Machine } from "@/lib/types";
 import { formatIndianCurrency } from "@/lib/utils";
 import { CalendarPicker } from "@/components/CalendarPicker";
+import { useAuth } from "@/components/AuthProvider";
+import { AccessDenied } from "@/components/AccessDenied";
 
 export default function ProductionPage() {
+  const { hasPermission, loading: authLoading } = useAuth();
   const [machines, setMachines] = useState<Machine[]>([]);
   const [rolls, setRolls] = useState<ProductionRoll[]>([]);
   const [loading, setLoading] = useState(true);
@@ -279,6 +282,15 @@ export default function ProductionPage() {
       filteredRolls.reduce((sum, r) => sum + r.netWeight, 0).toFixed(2)
     );
   }, [filteredRolls]);
+
+  if (!authLoading && !hasPermission("productionRollEntry")) {
+    return (
+      <AccessDenied
+        requiredPermission="productionRollEntry"
+        moduleName="Roll Production Entry"
+      />
+    );
+  }
 
   return (
     <div className="space-y-8">

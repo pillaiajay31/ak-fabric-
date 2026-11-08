@@ -13,8 +13,11 @@ import {
 } from "lucide-react";
 import { DeliveryChallan, TaxInvoice } from "@/lib/types";
 import { formatIndianCurrency, formatDateIndian } from "@/lib/utils";
+import { useAuth } from "@/components/AuthProvider";
+import { AccessDenied } from "@/components/AccessDenied";
 
 export default function DispatchListPage() {
+  const { hasPermission, loading: authLoading } = useAuth();
   const [challans, setChallans] = useState<DeliveryChallan[]>([]);
   const [invoices, setInvoices] = useState<TaxInvoice[]>([]);
   const [loading, setLoading] = useState(true);
@@ -51,6 +54,15 @@ export default function DispatchListPage() {
       c.placeOfSupply.toLowerCase().includes(q)
     );
   });
+
+  if (!authLoading && !hasPermission("financeView")) {
+    return (
+      <AccessDenied
+        requiredPermission="financeView"
+        moduleName="Dispatch & Invoices"
+      />
+    );
+  }
 
   return (
     <div className="space-y-6 sm:space-y-8">

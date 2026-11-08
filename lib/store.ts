@@ -8,6 +8,8 @@ import {
   CompanyProfile,
   DeliveryChallan,
   TaxInvoice,
+  UserAccount,
+  ROLE_PRESETS,
 } from "./types";
 import { connectMongo } from "./mongodb";
 import {
@@ -18,6 +20,7 @@ import {
   ChallanModel,
   InvoiceModel,
   CompanyModel,
+  UserModel,
 } from "./models";
 
 interface KnitFlowDatabase {
@@ -28,6 +31,7 @@ interface KnitFlowDatabase {
   rejections: RejectionLog[];
   challans: DeliveryChallan[];
   invoices: TaxInvoice[];
+  users: UserAccount[];
 }
 
 const DATA_DIR = path.join(process.cwd(), "data");
@@ -157,6 +161,41 @@ function getInitialSeedData(): KnitFlowDatabase {
     },
   ];
 
+  const users: UserAccount[] = [
+    {
+      id: "usr-admin",
+      username: "admin",
+      password: "admin", // Default password for initial setup
+      fullName: "A.K. Administrator",
+      role: "admin",
+      permissions: ROLE_PRESETS.admin,
+      isActive: true,
+      phone: "+91 98251 12345",
+      createdAt: "2026-01-01T00:00:00Z",
+    },
+    {
+      id: "usr-supervisor",
+      username: "supervisor",
+      password: "supervisor",
+      fullName: "Production Supervisor",
+      role: "supervisor",
+      permissions: ROLE_PRESETS.supervisor,
+      isActive: true,
+      phone: "+91 98251 55667",
+      createdAt: "2026-01-01T00:00:00Z",
+    },
+    {
+      id: "usr-operator",
+      username: "operator",
+      password: "operator",
+      fullName: "Mill Operator",
+      role: "operator",
+      permissions: ROLE_PRESETS.operator,
+      isActive: true,
+      createdAt: "2026-01-01T00:00:00Z",
+    },
+  ];
+
   return {
     company,
     machines,
@@ -165,6 +204,7 @@ function getInitialSeedData(): KnitFlowDatabase {
     rejections: [],
     challans: [],
     invoices: [],
+    users,
   };
 }
 
@@ -191,7 +231,16 @@ function ensureStoreExists(): KnitFlowDatabase {
 
   try {
     const raw = fs.readFileSync(STORE_FILE, "utf-8");
-    return JSON.parse(raw) as KnitFlowDatabase;
+    const parsed = JSON.parse(raw) as KnitFlowDatabase;
+    if (!parsed.users || parsed.users.length === 0) {
+      parsed.users = getInitialSeedData().users;
+      try {
+        fs.writeFileSync(STORE_FILE, JSON.stringify(parsed, null, 2), "utf-8");
+      } catch {
+        // Ignore
+      }
+    }
+    return parsed;
   } catch {
     const seed = getInitialSeedData();
     return seed;
@@ -219,6 +268,13 @@ async function ensureMongoSeeded() {
       await CompanyModel.create(seed.company);
       await MachineModel.insertMany(seed.machines);
       await CustomerModel.insertMany(seed.customers);
+      await UserModel.insertMany(seed.users);
+    } else {
+      const userCount = await UserModel.countDocuments();
+      if (userCount === 0) {
+        const seed = getInitialSeedData();
+        await UserModel.insertMany(seed.users);
+      }
     }
     mongoSeeded = true;
   } catch (err) {
@@ -664,5 +720,135 @@ export const store = {
     db.invoices.push(newInvoice);
     writeStore(db);
     return newInvoice;
+  },
+
+  // Users & Permissions
+  async getUsers(): Promise<UserAccount[]> {
+    const isMongo = await connectMongo();
+    if (isMongo) {
+      await ensureMongoSeeded();
+      const docs = await UserModel.find().lean();
+      return docs.map((d: any) => mapDoc<UserAccount>(d));
+    }
+    const db = ensureStoreExists();
+    return db.users || [];
+  },
+
+  async getUserById(id: string): Promise<UserAccount | undefined> {
+    const isMongo = await connectMongo();
+    if (isMongo) {
+      await ensureMongoSeeded();
+      const doc = await UserModel.findOne({
+        $or: [{ _id: id }, { id: id }],
+      }).lean();
+      return doc ? mapDoc<UserAccount>(doc) : undefined;
+    }
+    const db = ensureStoreExists();
+    return (db.users || []).find((u) => u.id === id);
+  },
+
+  async getUserByUsername(username: string): Promise<UserAccount | undefined> {
+    const cleanUsername = username.trim().toLowerCase();
+    const isMongo = await connectMongo();
+    if (isMongo) {
+      await ensureMongoSeeded();
+      const doc = await UserModel.findOne({ username: cleanUsername }).lean();
+      return doc ? mapDoc<UserAccount>(doc) : undefined;
+    }
+    const db = ensureStoreExists();
+    return (db.users || []).find(
+      (u) => u.username.toLowerCase() === cleanUsername
+    );
+  },
+
+  async addUser(
+    user: Omit<UserAccount, "id" | "createdAt">
+  ): Promise<UserAccount> {
+    const isMongo = await connectMongo();
+    const cleanUser = {
+      ...user,
+      username: user.username.trim().toLowerCase(),
+      createdAt: new Date().toISOString(),
+    };
+
+    if (isMongo) {
+      const created = await UserModel.create(cleanUser);
+      return mapDoc<UserAccount>(created);
+    }
+
+    const db = ensureStoreExists();
+    if (!db.users) db.users = [];
+    const newUser: UserAccount = {
+      ...cleanUser,
+      id: `usr-${Date.now()}`,
+    };
+    db.users.push(newUser);
+    writeStore(db);
+    return newUser;
+  },
+
+  async updateUser(
+    id: string,
+    updates: Partial<UserAccount>
+  ): Promise<UserAccount | null> {
+    const isMongo = await connectMongo();
+    const cleanUpdates = { ...updates };
+    if (cleanUpdates.username) {
+      cleanUpdates.username = cleanUpdates.username.trim().toLowerCase();
+    }
+
+    if (isMongo) {
+      const doc = await UserModel.findOneAndUpdate(
+        { $or: [{ _id: id }, { id: id }] },
+        cleanUpdates,
+        { new: true }
+      ).lean();
+      return doc ? mapDoc<UserAccount>(doc) : null;
+    }
+
+    const db = ensureStoreExists();
+    if (!db.users) db.users = [];
+    const idx = db.users.findIndex((u) => u.id === id);
+    if (idx === -1) return null;
+    db.users[idx] = { ...db.users[idx], ...cleanUpdates };
+    writeStore(db);
+    return db.users[idx];
+  },
+
+  async deleteUser(id: string): Promise<boolean> {
+    const isMongo = await connectMongo();
+    if (isMongo) {
+      const res = await UserModel.deleteOne({ $or: [{ _id: id }, { id: id }] });
+      return res.deletedCount > 0;
+    }
+
+    const db = ensureStoreExists();
+    if (!db.users) return false;
+    const len = db.users.length;
+    db.users = db.users.filter((u) => u.id !== id);
+    if (db.users.length !== len) {
+      writeStore(db);
+      return true;
+    }
+    return false;
+  },
+
+  async updateLastLogin(id: string): Promise<void> {
+    const now = new Date().toISOString();
+    const isMongo = await connectMongo();
+    if (isMongo) {
+      await UserModel.updateOne(
+        { $or: [{ _id: id }, { id: id }] },
+        { $set: { lastLoginAt: now } }
+      );
+      return;
+    }
+    const db = ensureStoreExists();
+    if (!db.users) return;
+    const u = db.users.find((user) => user.id === id);
+    if (u) {
+      u.lastLoginAt = now;
+      writeStore(db);
+    }
   },
 };

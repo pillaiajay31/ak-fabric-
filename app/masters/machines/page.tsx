@@ -12,8 +12,11 @@ import {
   Activity,
 } from "lucide-react";
 import { Machine } from "@/lib/types";
+import { useAuth } from "@/components/AuthProvider";
+import { AccessDenied } from "@/components/AccessDenied";
 
 export default function MachineMasterPage() {
+  const { hasPermission, loading: authLoading } = useAuth();
   const [machines, setMachines] = useState<Machine[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -142,6 +145,15 @@ export default function MachineMasterPage() {
       console.error(e);
     }
   };
+
+  if (!authLoading && !hasPermission("masterMachines")) {
+    return (
+      <AccessDenied
+        requiredPermission="masterMachines"
+        moduleName="Machine Master"
+      />
+    );
+  }
 
   return (
     <div className="space-y-8">
