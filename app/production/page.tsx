@@ -31,7 +31,7 @@ export default function ProductionPage() {
   const [rollNo, setRollNo] = useState<string>("");
   const [netWeight, setNetWeight] = useState<string>("");
   const [date, setDate] = useState<string>("");
-  const [shift, setShift] = useState<"Day" | "Night">("Day");
+  const [shift] = useState<"Day" | "Night">("Day");
   const [operator, setOperator] = useState<string>("");
   const [notes, setNotes] = useState<string>("");
   const [submitting, setSubmitting] = useState(false);
@@ -41,7 +41,7 @@ export default function ProductionPage() {
   const [batchMachine, setBatchMachine] = useState<string>("A");
   const [batchStartNumber, setBatchStartNumber] = useState<number>(1001);
   const [batchDate, setBatchDate] = useState<string>("");
-  const [batchShift, setBatchShift] = useState<"Day" | "Night">("Day");
+  const [batchShift] = useState<"Day" | "Night">("Day");
   const [batchRows, setBatchRows] = useState<Array<{ id: number; weight: string }>>([
     { id: 1, weight: "" },
     { id: 2, weight: "" },
@@ -445,49 +445,18 @@ export default function ProductionPage() {
                 </span>
               </div>
 
-              {/* Shift */}
-              <div>
-                <label className="block text-xs font-medium text-neutral-600 dark:text-neutral-400 mb-1.5">
-                  Production Shift
-                </label>
-                <div className="grid grid-cols-2 gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setShift("Day")}
-                    className={`py-2.5 px-3 rounded-lg border text-xs font-semibold transition-all ${
-                      shift === "Day"
-                        ? "border-neutral-900 bg-neutral-900 text-white dark:border-white dark:bg-white dark:text-neutral-900"
-                        : "border-neutral-200 bg-neutral-50 text-neutral-700 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-300"
-                    }`}
-                  >
-                    Day Shift
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setShift("Night")}
-                    className={`py-2.5 px-3 rounded-lg border text-xs font-semibold transition-all ${
-                      shift === "Night"
-                        ? "border-neutral-900 bg-neutral-900 text-white dark:border-white dark:bg-white dark:text-neutral-900"
-                        : "border-neutral-200 bg-neutral-50 text-neutral-700 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-300"
-                    }`}
-                  >
-                    Night Shift
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Additional Details */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 border-t border-neutral-100 dark:border-neutral-800">
+              {/* Production Date */}
               <div>
                 <CalendarPicker
                   label="Production Date"
                   value={date}
                   onChange={(val) => setDate(val)}
-                  size="sm"
                 />
               </div>
+            </div>
 
+            {/* Additional Details */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-neutral-100 dark:border-neutral-800">
               <div>
                 <label className="block text-xs font-medium text-neutral-600 dark:text-neutral-400 mb-1">
                   Operator Name (Optional)
@@ -543,7 +512,7 @@ export default function ProductionPage() {
           </div>
 
           <form onSubmit={handleBatchSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 pb-4 border-b border-neutral-200 dark:border-neutral-800">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pb-4 border-b border-neutral-200 dark:border-neutral-800">
               <div>
                 <label className="block text-xs font-medium text-neutral-600 dark:text-neutral-400 mb-1">
                   Machine
@@ -580,20 +549,6 @@ export default function ProductionPage() {
                   onChange={(val) => setBatchDate(val)}
                   size="sm"
                 />
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium text-neutral-600 dark:text-neutral-400 mb-1">
-                  Shift
-                </label>
-                <select
-                  value={batchShift}
-                  onChange={(e) => setBatchShift(e.target.value as "Day" | "Night")}
-                  className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-950 text-neutral-900 dark:text-white text-xs font-medium"
-                >
-                  <option value="Day">Day Shift</option>
-                  <option value="Night">Night Shift</option>
-                </select>
               </div>
             </div>
 
