@@ -1,0 +1,2159 @@
+{
+  "company": {
+    "name": "A.K. FABRIC",
+    "address": "Balaji Industrial Estate, Gala No 110 , Survey No 113/2/7, Amli, Silvassa-396230, Dadra & Nagar Haveli",
+    "jurisdiction": "SILVASSA",
+    "gstin": "26AGHPP8818L1ZQ",
+    "email": "akfabric17@gmail.com",
+    "phone": "+91 98251 12345",
+    "bankName": "BANK OF BARODA",
+    "bankBranch": "SILVASSA",
+    "bankAccountNo": "26140500010164",
+    "bankIfsc": "BARB0SILVAS",
+    "defaultHsn": "998821",
+    "defaultRate": 42,
+    "defaultDescription": "Job work charge for Nylon 44/10 knitted grey fabric"
+  },
+  "machines": [
+    {
+      "id": "mc-a",
+      "code": "A",
+      "name": "Knitting Machine A",
+      "model": "Single Jersey 24G 30\"",
+      "rollPrefix": "A.",
+      "dailyTargetKg": 450,
+      "status": "active",
+      "notes": "High speed nylon knitting line 1",
+      "createdAt": "2026-01-10T08:00:00Z"
+    },
+    {
+      "id": "mc-b",
+      "code": "B",
+      "name": "Knitting Machine B",
+      "model": "Interlock 28G 34\"",
+      "rollPrefix": "B.",
+      "dailyTargetKg": 550,
+      "status": "active",
+      "notes": "Heavy denier grey fabric line 2",
+      "createdAt": "2026-01-10T08:00:00Z"
+    },
+    {
+      "id": "mc-c",
+      "code": "C",
+      "name": "Knitting Machine C",
+      "model": "Circular Knitting 24G 32\"",
+      "rollPrefix": "C.",
+      "dailyTargetKg": 500,
+      "status": "active",
+      "notes": "Nylon 44/10 core production unit",
+      "createdAt": "2026-01-10T08:00:00Z"
+    },
+    {
+      "id": "mc-d",
+      "code": "D",
+      "name": "Knitting Machine D",
+      "model": "High Speed Jersey 28G 30\"",
+      "rollPrefix": "D.",
+      "dailyTargetKg": 450,
+      "status": "active",
+      "notes": "Fine gauge nylon fabric unit",
+      "createdAt": "2026-01-10T08:00:00Z"
+    }
+  ],
+  "customers": [
+    {
+      "id": "cust-1",
+      "name": "M/S Pooja Shree Silk & Synthetic",
+      "gstin": "27AUBPS4559D1ZH",
+      "billingAddress": "Jayaraj Warehouse Cum textile PARK, Bidg No E-1, Gala No 9/10 Opp pragati Stone, Kalwar village Bhiwandi-421303",
+      "shippingAddress": "Jayaraj Warehouse Cum textile PARK, Bidg No E-1, Gala No 9/10 Opp pragati Stone mills Kalwar village Bhiwandi-421303",
+      "city": "Bhiwandi",
+      "state": "Maharashtra",
+      "stateCode": "27",
+      "pincode": "421303",
+      "preferredTransport": "SHIV TRANSPORT",
+      "defaultVehicleNo": "DD.01.J.9713",
+      "placeOfSupply": "BHIWANDI",
+      "phone": "+91 98200 44551",
+      "email": "poojashree.textiles@gmail.com",
+      "createdAt": "2026-02-01T10:00:00Z"
+    },
+    {
+      "id": "cust-2",
+      "name": "Reliance PolyFab Mills",
+      "gstin": "24AABCR8829C1ZX",
+      "billingAddress": "Plot No 44, GIDC Industrial Estate, Pandesara, Surat-394221",
+      "shippingAddress": "Plot No 44, GIDC Industrial Estate, Pandesara, Surat-394221",
+      "city": "Surat",
+      "state": "Gujarat",
+      "stateCode": "24",
+      "pincode": "394221",
+      "preferredTransport": "GUJARAT ROADWAYS",
+      "defaultVehicleNo": "GJ.05.BZ.4021",
+      "placeOfSupply": "SURAT",
+      "phone": "+91 99042 11223",
+      "email": "dispatch@polyfabmills.in",
+      "createdAt": "2026-02-15T11:30:00Z"
+    },
+    {
+      "id": "cust-3",
+      "name": "Silvassa Knits & Dyes Ltd",
+      "gstin": "26AACCS1190L1ZO",
+      "billingAddress": "Survey 72/1, Piparia Industrial Area, Silvassa-396230",
+      "shippingAddress": "Survey 72/1, Piparia Industrial Area, Silvassa-396230",
+      "city": "Silvassa",
+      "state": "Dadra & Nagar Haveli",
+      "stateCode": "26",
+      "pincode": "396230",
+      "preferredTransport": "LOCAL TEMPO",
+      "defaultVehicleNo": "DD.01.K.1234",
+      "placeOfSupply": "SILVASSA",
+      "phone": "+91 98250 99887",
+      "email": "orders@silvassaknits.com",
+      "createdAt": "2026-03-01T09:00:00Z"
+    }
+  ],
+  "rolls": [
+    {
+      "rollNo": "A.1001",
+      "machineCode": "A",
+      "netWeight": 12,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465229763-954",
+      "createdAt": "2026-10-31T16:47:09.763Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "A.1002",
+      "machineCode": "A",
+      "netWeight": 12,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465229982-170",
+      "createdAt": "2026-10-31T16:47:09.982Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "A.1003",
+      "machineCode": "A",
+      "netWeight": 1,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465230158-227",
+      "createdAt": "2026-10-31T16:47:10.158Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "A.1004",
+      "machineCode": "A",
+      "netWeight": 2,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465230334-85",
+      "createdAt": "2026-10-31T16:47:10.334Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "A.1005",
+      "machineCode": "A",
+      "netWeight": 12,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465230695-385",
+      "createdAt": "2026-10-31T16:47:10.695Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "A.1006",
+      "machineCode": "A",
+      "netWeight": 12,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465230877-525",
+      "createdAt": "2026-10-31T16:47:10.877Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "A.1007",
+      "machineCode": "A",
+      "netWeight": 12,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465231078-373",
+      "createdAt": "2026-10-31T16:47:11.078Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "A.1008",
+      "machineCode": "A",
+      "netWeight": 1,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465231294-193",
+      "createdAt": "2026-10-31T16:47:11.294Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "A.1009",
+      "machineCode": "A",
+      "netWeight": 21,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465231476-114",
+      "createdAt": "2026-10-31T16:47:11.476Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "A.1010",
+      "machineCode": "A",
+      "netWeight": 12,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465233710-989",
+      "createdAt": "2026-10-31T16:47:13.710Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "A.1011",
+      "machineCode": "A",
+      "netWeight": 5,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465234603-965",
+      "createdAt": "2026-10-31T16:47:14.603Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "A.1012",
+      "machineCode": "A",
+      "netWeight": 54,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465234820-912",
+      "createdAt": "2026-10-31T16:47:14.820Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "A.1013",
+      "machineCode": "A",
+      "netWeight": 45,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465235043-948",
+      "createdAt": "2026-10-31T16:47:15.043Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "A.1014",
+      "machineCode": "A",
+      "netWeight": 43,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465235268-284",
+      "createdAt": "2026-10-31T16:47:15.268Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "A.1015",
+      "machineCode": "A",
+      "netWeight": 34,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465235469-945",
+      "createdAt": "2026-10-31T16:47:15.469Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "A.1016",
+      "machineCode": "A",
+      "netWeight": 34,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465235660-426",
+      "createdAt": "2026-10-31T16:47:15.660Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "A.1017",
+      "machineCode": "A",
+      "netWeight": 23,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465235871-917",
+      "createdAt": "2026-10-31T16:47:15.871Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "A.1018",
+      "machineCode": "A",
+      "netWeight": 32,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465236060-511",
+      "createdAt": "2026-10-31T16:47:16.060Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "A.1019",
+      "machineCode": "A",
+      "netWeight": 23,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465236258-441",
+      "createdAt": "2026-10-31T16:47:16.258Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "A.1020",
+      "machineCode": "A",
+      "netWeight": 23,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465236459-335",
+      "createdAt": "2026-10-31T16:47:16.460Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "A.1021",
+      "machineCode": "A",
+      "netWeight": 12,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465236653-226",
+      "createdAt": "2026-10-31T16:47:16.653Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "A.1022",
+      "machineCode": "A",
+      "netWeight": 21,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465236843-750",
+      "createdAt": "2026-10-31T16:47:16.843Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "A.1023",
+      "machineCode": "A",
+      "netWeight": 12,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465237021-589",
+      "createdAt": "2026-10-31T16:47:17.021Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "B.1001",
+      "machineCode": "B",
+      "netWeight": 32,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465241046-163",
+      "createdAt": "2026-10-31T16:47:21.046Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "B.1002",
+      "machineCode": "B",
+      "netWeight": 32,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465241317-512",
+      "createdAt": "2026-10-31T16:47:21.317Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "B.1003",
+      "machineCode": "B",
+      "netWeight": 32,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465241470-235",
+      "createdAt": "2026-10-31T16:47:21.470Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "B.1004",
+      "machineCode": "B",
+      "netWeight": 32,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465241676-249",
+      "createdAt": "2026-10-31T16:47:21.676Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "B.1005",
+      "machineCode": "B",
+      "netWeight": 32,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465243535-517",
+      "createdAt": "2026-10-31T16:47:23.536Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "B.1006",
+      "machineCode": "B",
+      "netWeight": 45,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465243767-634",
+      "createdAt": "2026-10-31T16:47:23.767Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "B.1007",
+      "machineCode": "B",
+      "netWeight": 54,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465243955-193",
+      "createdAt": "2026-10-31T16:47:23.955Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "B.1008",
+      "machineCode": "B",
+      "netWeight": 56,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465244149-636",
+      "createdAt": "2026-10-31T16:47:24.149Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "B.1009",
+      "machineCode": "B",
+      "netWeight": 43,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465244348-745",
+      "createdAt": "2026-10-31T16:47:24.348Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "B.1010",
+      "machineCode": "B",
+      "netWeight": 43,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465244546-712",
+      "createdAt": "2026-10-31T16:47:24.546Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "B.1011",
+      "machineCode": "B",
+      "netWeight": 34,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465244745-183",
+      "createdAt": "2026-10-31T16:47:24.745Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "B.1012",
+      "machineCode": "B",
+      "netWeight": 32,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465244916-485",
+      "createdAt": "2026-10-31T16:47:24.916Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "C.1001",
+      "machineCode": "C",
+      "netWeight": 32,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465249386-644",
+      "createdAt": "2026-10-31T16:47:29.386Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "C.1002",
+      "machineCode": "C",
+      "netWeight": 32,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465249648-117",
+      "createdAt": "2026-10-31T16:47:29.648Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "C.1003",
+      "machineCode": "C",
+      "netWeight": 32,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465252725-959",
+      "createdAt": "2026-10-31T16:47:32.725Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "C.1004",
+      "machineCode": "C",
+      "netWeight": 45,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465253098-595",
+      "createdAt": "2026-10-31T16:47:33.098Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "C.1005",
+      "machineCode": "C",
+      "netWeight": 45,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465253303-424",
+      "createdAt": "2026-10-31T16:47:33.303Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "C.1006",
+      "machineCode": "C",
+      "netWeight": 43,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465253518-679",
+      "createdAt": "2026-10-31T16:47:33.518Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "C.1007",
+      "machineCode": "C",
+      "netWeight": 34,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465253730-774",
+      "createdAt": "2026-10-31T16:47:33.730Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "C.1008",
+      "machineCode": "C",
+      "netWeight": 23,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465253938-566",
+      "createdAt": "2026-10-31T16:47:33.938Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "C.1009",
+      "machineCode": "C",
+      "netWeight": 2,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465254115-919",
+      "createdAt": "2026-10-31T16:47:34.115Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "D.1001",
+      "machineCode": "D",
+      "netWeight": 23,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465257118-368",
+      "createdAt": "2026-10-31T16:47:37.118Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "D.1002",
+      "machineCode": "D",
+      "netWeight": 3,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465257317-812",
+      "createdAt": "2026-10-31T16:47:37.318Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "D.1003",
+      "machineCode": "D",
+      "netWeight": 23,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465257523-474",
+      "createdAt": "2026-10-31T16:47:37.523Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "D.1004",
+      "machineCode": "D",
+      "netWeight": 32,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465257723-272",
+      "createdAt": "2026-10-31T16:47:37.723Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "D.1005",
+      "machineCode": "D",
+      "netWeight": 34,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465257914-594",
+      "createdAt": "2026-10-31T16:47:37.915Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "D.1006",
+      "machineCode": "D",
+      "netWeight": 54,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-10-31",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1793465258275-355",
+      "createdAt": "2026-10-31T16:47:38.275Z",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1"
+    },
+    {
+      "rollNo": "A.1024",
+      "machineCode": "A",
+      "netWeight": 15,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112185295-634",
+      "createdAt": "2026-11-08T04:29:45.295Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "A.1025",
+      "machineCode": "A",
+      "netWeight": 35,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112188408-297",
+      "createdAt": "2026-11-08T04:29:48.408Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "A.1026",
+      "machineCode": "A",
+      "netWeight": 54,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112192879-197",
+      "createdAt": "2026-11-08T04:29:52.879Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "A.1027",
+      "machineCode": "A",
+      "netWeight": 18,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112194504-466",
+      "createdAt": "2026-11-08T04:29:54.504Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "A.1028",
+      "machineCode": "A",
+      "netWeight": 18,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112195600-518",
+      "createdAt": "2026-11-08T04:29:55.600Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "A.1029",
+      "machineCode": "A",
+      "netWeight": 18,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112196510-848",
+      "createdAt": "2026-11-08T04:29:56.510Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "A.1030",
+      "machineCode": "A",
+      "netWeight": 18.3,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112198199-473",
+      "createdAt": "2026-11-08T04:29:58.199Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "A.1031",
+      "machineCode": "A",
+      "netWeight": 18.7,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112199951-427",
+      "createdAt": "2026-11-08T04:29:59.951Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "A.1032",
+      "machineCode": "A",
+      "netWeight": 3,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112201007-756",
+      "createdAt": "2026-11-08T04:30:01.007Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "B.1013",
+      "machineCode": "B",
+      "netWeight": 26,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112203993-935",
+      "createdAt": "2026-11-08T04:30:03.993Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "B.1014",
+      "machineCode": "B",
+      "netWeight": 5,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112204582-705",
+      "createdAt": "2026-11-08T04:30:04.582Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "B.1015",
+      "machineCode": "B",
+      "netWeight": 32,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112204997-260",
+      "createdAt": "2026-11-08T04:30:04.997Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "B.1016",
+      "machineCode": "B",
+      "netWeight": 5,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112205511-181",
+      "createdAt": "2026-11-08T04:30:05.511Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "B.1017",
+      "machineCode": "B",
+      "netWeight": 4,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112205716-70",
+      "createdAt": "2026-11-08T04:30:05.716Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "B.1018",
+      "machineCode": "B",
+      "netWeight": 3,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112205909-622",
+      "createdAt": "2026-11-08T04:30:05.909Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "B.1019",
+      "machineCode": "B",
+      "netWeight": 4,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112206082-982",
+      "createdAt": "2026-11-08T04:30:06.082Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "B.1020",
+      "machineCode": "B",
+      "netWeight": 5,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112206283-433",
+      "createdAt": "2026-11-08T04:30:06.283Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "B.1021",
+      "machineCode": "B",
+      "netWeight": 6,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112206453-111",
+      "createdAt": "2026-11-08T04:30:06.453Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "B.1022",
+      "machineCode": "B",
+      "netWeight": 4,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112206647-843",
+      "createdAt": "2026-11-08T04:30:06.647Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "B.1023",
+      "machineCode": "B",
+      "netWeight": 4,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112206840-827",
+      "createdAt": "2026-11-08T04:30:06.840Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "C.1010",
+      "machineCode": "C",
+      "netWeight": 2,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112208916-897",
+      "createdAt": "2026-11-08T04:30:08.916Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "C.1011",
+      "machineCode": "C",
+      "netWeight": 34,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112209174-268",
+      "createdAt": "2026-11-08T04:30:09.174Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "C.1012",
+      "machineCode": "C",
+      "netWeight": 4,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112209396-190",
+      "createdAt": "2026-11-08T04:30:09.396Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "C.1013",
+      "machineCode": "C",
+      "netWeight": 5,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112209585-789",
+      "createdAt": "2026-11-08T04:30:09.585Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "C.1014",
+      "machineCode": "C",
+      "netWeight": 4,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112209782-703",
+      "createdAt": "2026-11-08T04:30:09.782Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "C.1015",
+      "machineCode": "C",
+      "netWeight": 3,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112209988-769",
+      "createdAt": "2026-11-08T04:30:09.988Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "C.1016",
+      "machineCode": "C",
+      "netWeight": 35,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112210750-173",
+      "createdAt": "2026-11-08T04:30:10.750Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "D.1007",
+      "machineCode": "D",
+      "netWeight": 3,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112213655-87",
+      "createdAt": "2026-11-08T04:30:13.655Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "D.1008",
+      "machineCode": "D",
+      "netWeight": 4,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112214326-619",
+      "createdAt": "2026-11-08T04:30:14.326Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "D.1009",
+      "machineCode": "D",
+      "netWeight": 4,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112214538-730",
+      "createdAt": "2026-11-08T04:30:14.538Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "D.1010",
+      "machineCode": "D",
+      "netWeight": 34,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112214748-905",
+      "createdAt": "2026-11-08T04:30:14.748Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "D.1011",
+      "machineCode": "D",
+      "netWeight": 4,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112214959-15",
+      "createdAt": "2026-11-08T04:30:14.959Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "D.1012",
+      "machineCode": "D",
+      "netWeight": 35,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112218686-261",
+      "createdAt": "2026-11-08T04:30:18.686Z",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2"
+    },
+    {
+      "rollNo": "D.1013",
+      "machineCode": "D",
+      "netWeight": 18,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "Ravi",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112539766-62",
+      "createdAt": "2026-11-08T04:35:39.766Z",
+      "challanId": "ch-1794112729057",
+      "challanNo": "3"
+    },
+    {
+      "rollNo": "A.1033",
+      "machineCode": "A",
+      "netWeight": 10,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "Ravi",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112578623-577",
+      "createdAt": "2026-11-08T04:36:18.623Z",
+      "challanId": "ch-1794112729057",
+      "challanNo": "3"
+    },
+    {
+      "rollNo": "A.1034",
+      "machineCode": "A",
+      "netWeight": 18,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "Ravi",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112581897-913",
+      "createdAt": "2026-11-08T04:36:21.897Z",
+      "challanId": "ch-1794112729057",
+      "challanNo": "3"
+    },
+    {
+      "rollNo": "C.1017",
+      "machineCode": "C",
+      "netWeight": 18,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "Ravi",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112586589-109",
+      "createdAt": "2026-11-08T04:36:26.589Z",
+      "challanId": "ch-1794112729057",
+      "challanNo": "3"
+    },
+    {
+      "rollNo": "C.1018",
+      "machineCode": "C",
+      "netWeight": 65,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "Ravi",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112591623-918",
+      "createdAt": "2026-11-08T04:36:31.623Z",
+      "challanId": "ch-1794112729057",
+      "challanNo": "3"
+    },
+    {
+      "rollNo": "C.1019",
+      "machineCode": "C",
+      "netWeight": 28,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "Ravi",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112595000-230",
+      "createdAt": "2026-11-08T04:36:35.000Z",
+      "challanId": "ch-1794112729057",
+      "challanNo": "3"
+    },
+    {
+      "rollNo": "C.1020",
+      "machineCode": "C",
+      "netWeight": 36,
+      "fabricQuality": "Nylon 44/10 knitted grey fabric",
+      "date": "2026-11-08",
+      "shift": "Day",
+      "operator": "Ravi",
+      "status": "dispatched",
+      "notes": "",
+      "id": "roll-1794112598238-842",
+      "createdAt": "2026-11-08T04:36:38.238Z",
+      "challanId": "ch-1794112729057",
+      "challanNo": "3"
+    }
+  ],
+  "rejections": [],
+  "challans": [
+    {
+      "challanNo": "1",
+      "challanDate": "2026-10-31",
+      "customerId": "cust-1",
+      "customerName": "M/S Pooja Shree Silk & Synthetic",
+      "customerGstin": "27AUBPS4559D1ZH",
+      "shippingAddress": "Jayaraj Warehouse Cum textile PARK, Bidg No E-1, Gala No 9/10 Opp pragati Stone mills Kalwar village Bhiwandi-421303",
+      "transportMode": "ROADWAYS",
+      "vehicleNo": "DD.01.J.3430",
+      "placeOfSupply": "BHIWANDI",
+      "lrNo": "",
+      "transporter": "SHIV TRANSPORT",
+      "noOfBags": 49,
+      "rolls": [
+        {
+          "rollNo": "D.1006",
+          "netWeight": 54,
+          "machineCode": "D"
+        },
+        {
+          "rollNo": "D.1005",
+          "netWeight": 34,
+          "machineCode": "D"
+        },
+        {
+          "rollNo": "D.1004",
+          "netWeight": 32,
+          "machineCode": "D"
+        },
+        {
+          "rollNo": "D.1003",
+          "netWeight": 23,
+          "machineCode": "D"
+        },
+        {
+          "rollNo": "D.1002",
+          "netWeight": 3,
+          "machineCode": "D"
+        },
+        {
+          "rollNo": "D.1001",
+          "netWeight": 23,
+          "machineCode": "D"
+        },
+        {
+          "rollNo": "C.1009",
+          "netWeight": 2,
+          "machineCode": "C"
+        },
+        {
+          "rollNo": "C.1008",
+          "netWeight": 23,
+          "machineCode": "C"
+        },
+        {
+          "rollNo": "C.1007",
+          "netWeight": 34,
+          "machineCode": "C"
+        },
+        {
+          "rollNo": "C.1006",
+          "netWeight": 43,
+          "machineCode": "C"
+        },
+        {
+          "rollNo": "C.1005",
+          "netWeight": 45,
+          "machineCode": "C"
+        },
+        {
+          "rollNo": "C.1004",
+          "netWeight": 45,
+          "machineCode": "C"
+        },
+        {
+          "rollNo": "C.1003",
+          "netWeight": 32,
+          "machineCode": "C"
+        },
+        {
+          "rollNo": "C.1002",
+          "netWeight": 32,
+          "machineCode": "C"
+        },
+        {
+          "rollNo": "C.1001",
+          "netWeight": 32,
+          "machineCode": "C"
+        },
+        {
+          "rollNo": "B.1012",
+          "netWeight": 32,
+          "machineCode": "B"
+        },
+        {
+          "rollNo": "B.1011",
+          "netWeight": 34,
+          "machineCode": "B"
+        },
+        {
+          "rollNo": "B.1010",
+          "netWeight": 43,
+          "machineCode": "B"
+        },
+        {
+          "rollNo": "B.1009",
+          "netWeight": 43,
+          "machineCode": "B"
+        },
+        {
+          "rollNo": "B.1008",
+          "netWeight": 56,
+          "machineCode": "B"
+        },
+        {
+          "rollNo": "B.1007",
+          "netWeight": 54,
+          "machineCode": "B"
+        },
+        {
+          "rollNo": "B.1006",
+          "netWeight": 45,
+          "machineCode": "B"
+        },
+        {
+          "rollNo": "B.1005",
+          "netWeight": 32,
+          "machineCode": "B"
+        },
+        {
+          "rollNo": "B.1004",
+          "netWeight": 32,
+          "machineCode": "B"
+        },
+        {
+          "rollNo": "B.1003",
+          "netWeight": 32,
+          "machineCode": "B"
+        },
+        {
+          "rollNo": "B.1002",
+          "netWeight": 32,
+          "machineCode": "B"
+        },
+        {
+          "rollNo": "B.1001",
+          "netWeight": 32,
+          "machineCode": "B"
+        },
+        {
+          "rollNo": "A.1023",
+          "netWeight": 12,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1022",
+          "netWeight": 21,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1021",
+          "netWeight": 12,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1020",
+          "netWeight": 23,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1019",
+          "netWeight": 23,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1018",
+          "netWeight": 32,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1017",
+          "netWeight": 23,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1016",
+          "netWeight": 34,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1015",
+          "netWeight": 34,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1014",
+          "netWeight": 43,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1013",
+          "netWeight": 45,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1012",
+          "netWeight": 54,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1011",
+          "netWeight": 5,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1010",
+          "netWeight": 12,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1009",
+          "netWeight": 21,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1008",
+          "netWeight": 1,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1007",
+          "netWeight": 12,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1006",
+          "netWeight": 12,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1005",
+          "netWeight": 12,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1004",
+          "netWeight": 2,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1003",
+          "netWeight": 1,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1002",
+          "netWeight": 12,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1001",
+          "netWeight": 12,
+          "machineCode": "A"
+        }
+      ],
+      "totalRolls": 50,
+      "totalWeight": 1382,
+      "machineBreakdown": {
+        "D": {
+          "rolls": 6,
+          "weight": 169
+        },
+        "C": {
+          "rolls": 9,
+          "weight": 288
+        },
+        "B": {
+          "rolls": 12,
+          "weight": 467
+        },
+        "A": {
+          "rolls": 23,
+          "weight": 458
+        }
+      },
+      "machineSummaryText": "TOTAL WEIGHT (D) 169.00 KG + WEIGHT (C) 288.00 KG + WEIGHT (B) 467.00 KG + WEIGHT (A) 458.00 KG = 1382.00 KG",
+      "fabricQuality": "NYLON 44/10 KNITTED GREY FABRIC",
+      "id": "ch-1793465294356",
+      "createdAt": "2026-10-31T16:48:14.356Z"
+    },
+    {
+      "challanNo": "2",
+      "challanDate": "2026-11-08",
+      "customerId": "cust-1",
+      "customerName": "M/S Pooja Shree Silk & Synthetic",
+      "customerGstin": "27AUBPS4559D1ZH",
+      "shippingAddress": "Jayaraj Warehouse Cum textile PARK, Bidg No E-1, Gala No 9/10 Opp pragati Stone mills Kalwar village Bhiwandi-421303",
+      "transportMode": "ROADWAYS",
+      "vehicleNo": "DD.01.J.9713",
+      "placeOfSupply": "BHIWANDI",
+      "lrNo": "",
+      "transporter": "SHIV TRANSPORT",
+      "noOfBags": 49,
+      "rolls": [
+        {
+          "rollNo": "D.1012",
+          "netWeight": 35,
+          "machineCode": "D"
+        },
+        {
+          "rollNo": "D.1011",
+          "netWeight": 4,
+          "machineCode": "D"
+        },
+        {
+          "rollNo": "D.1010",
+          "netWeight": 34,
+          "machineCode": "D"
+        },
+        {
+          "rollNo": "D.1009",
+          "netWeight": 4,
+          "machineCode": "D"
+        },
+        {
+          "rollNo": "D.1008",
+          "netWeight": 4,
+          "machineCode": "D"
+        },
+        {
+          "rollNo": "D.1007",
+          "netWeight": 3,
+          "machineCode": "D"
+        },
+        {
+          "rollNo": "C.1016",
+          "netWeight": 35,
+          "machineCode": "C"
+        },
+        {
+          "rollNo": "C.1015",
+          "netWeight": 3,
+          "machineCode": "C"
+        },
+        {
+          "rollNo": "C.1014",
+          "netWeight": 4,
+          "machineCode": "C"
+        },
+        {
+          "rollNo": "C.1013",
+          "netWeight": 5,
+          "machineCode": "C"
+        },
+        {
+          "rollNo": "C.1012",
+          "netWeight": 4,
+          "machineCode": "C"
+        },
+        {
+          "rollNo": "C.1011",
+          "netWeight": 34,
+          "machineCode": "C"
+        },
+        {
+          "rollNo": "C.1010",
+          "netWeight": 2,
+          "machineCode": "C"
+        },
+        {
+          "rollNo": "B.1023",
+          "netWeight": 4,
+          "machineCode": "B"
+        },
+        {
+          "rollNo": "B.1022",
+          "netWeight": 4,
+          "machineCode": "B"
+        },
+        {
+          "rollNo": "B.1021",
+          "netWeight": 6,
+          "machineCode": "B"
+        },
+        {
+          "rollNo": "B.1020",
+          "netWeight": 5,
+          "machineCode": "B"
+        },
+        {
+          "rollNo": "B.1019",
+          "netWeight": 4,
+          "machineCode": "B"
+        },
+        {
+          "rollNo": "B.1018",
+          "netWeight": 3,
+          "machineCode": "B"
+        },
+        {
+          "rollNo": "B.1017",
+          "netWeight": 4,
+          "machineCode": "B"
+        },
+        {
+          "rollNo": "B.1016",
+          "netWeight": 5,
+          "machineCode": "B"
+        },
+        {
+          "rollNo": "B.1015",
+          "netWeight": 32,
+          "machineCode": "B"
+        },
+        {
+          "rollNo": "B.1014",
+          "netWeight": 5,
+          "machineCode": "B"
+        },
+        {
+          "rollNo": "B.1013",
+          "netWeight": 26,
+          "machineCode": "B"
+        },
+        {
+          "rollNo": "A.1032",
+          "netWeight": 3,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1031",
+          "netWeight": 18.7,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1030",
+          "netWeight": 18.3,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1029",
+          "netWeight": 18,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1028",
+          "netWeight": 18,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1027",
+          "netWeight": 18,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1026",
+          "netWeight": 54,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1025",
+          "netWeight": 35,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1024",
+          "netWeight": 15,
+          "machineCode": "A"
+        }
+      ],
+      "totalRolls": 33,
+      "totalWeight": 467,
+      "machineBreakdown": {
+        "D": {
+          "rolls": 6,
+          "weight": 84
+        },
+        "C": {
+          "rolls": 7,
+          "weight": 87
+        },
+        "B": {
+          "rolls": 11,
+          "weight": 98
+        },
+        "A": {
+          "rolls": 9,
+          "weight": 198
+        }
+      },
+      "machineSummaryText": "TOTAL WEIGHT (D) 84.00 KG + WEIGHT (C) 87.00 KG + WEIGHT (B) 98.00 KG + WEIGHT (A) 198.00 KG = 467.00 KG",
+      "fabricQuality": "NYLON 44/10 KNITTED GREY FABRIC",
+      "id": "ch-1794112261033",
+      "createdAt": "2026-11-08T04:31:01.033Z"
+    },
+    {
+      "challanNo": "3",
+      "challanDate": "2026-11-08",
+      "customerId": "cust-1",
+      "customerName": "M/S Pooja Shree Silk & Synthetic",
+      "customerGstin": "27AUBPS4559D1ZH",
+      "shippingAddress": "Jayaraj Warehouse Cum textile PARK, Bidg No E-1, Gala No 9/10 Opp pragati Stone mills Kalwar village Bhiwandi-421303",
+      "transportMode": "ROADWAYS",
+      "vehicleNo": "DD.01.J.9713",
+      "placeOfSupply": "BHIWANDI",
+      "lrNo": "",
+      "transporter": "SHIV TRANSPORT",
+      "noOfBags": 49,
+      "rolls": [
+        {
+          "rollNo": "C.1020",
+          "netWeight": 36,
+          "machineCode": "C"
+        },
+        {
+          "rollNo": "C.1019",
+          "netWeight": 28,
+          "machineCode": "C"
+        },
+        {
+          "rollNo": "C.1018",
+          "netWeight": 65,
+          "machineCode": "C"
+        },
+        {
+          "rollNo": "C.1017",
+          "netWeight": 18,
+          "machineCode": "C"
+        },
+        {
+          "rollNo": "A.1034",
+          "netWeight": 18,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "A.1033",
+          "netWeight": 10,
+          "machineCode": "A"
+        },
+        {
+          "rollNo": "D.1013",
+          "netWeight": 18,
+          "machineCode": "D"
+        }
+      ],
+      "totalRolls": 7,
+      "totalWeight": 193,
+      "machineBreakdown": {
+        "C": {
+          "rolls": 4,
+          "weight": 147
+        },
+        "A": {
+          "rolls": 2,
+          "weight": 28
+        },
+        "D": {
+          "rolls": 1,
+          "weight": 18
+        }
+      },
+      "machineSummaryText": "TOTAL WEIGHT (C) 147.00 KG + WEIGHT (A) 28.00 KG + WEIGHT (D) 18.00 KG = 193.00 KG",
+      "fabricQuality": "NYLON 44/10 KNITTED GREY FABRIC",
+      "id": "ch-1794112729057",
+      "createdAt": "2026-11-08T04:38:49.057Z"
+    }
+  ],
+  "invoices": [
+    {
+      "invoiceNo": "1",
+      "invoiceDate": "2026-10-31",
+      "challanId": "ch-1793465294356",
+      "challanNo": "1",
+      "customerId": "cust-1",
+      "customerName": "M/S Pooja Shree Silk & Synthetic",
+      "customerGstin": "27AUBPS4559D1ZH",
+      "billingAddress": "Jayaraj Warehouse Cum textile PARK, Bidg No E-1, Gala No 9/10 Opp pragati Stone, Kalwar village Bhiwandi-421303",
+      "shippingAddress": "Jayaraj Warehouse Cum textile PARK, Bidg No E-1, Gala No 9/10 Opp pragati Stone mills Kalwar village Bhiwandi-421303",
+      "transportMode": "ROADWAYS",
+      "vehicleNo": "DD.01.J.3430",
+      "placeOfSupply": "BHIWANDI",
+      "dateOfSupply": "2026-10-31",
+      "lrNo": "",
+      "description": "Job work charge for Nylon 44/10\nknitted grey fabric challan no: 1",
+      "hsnSac": "998821",
+      "noOfRolls": 50,
+      "quantityKg": 1382,
+      "ratePerKg": 42,
+      "taxableAmount": 58044,
+      "isInterState": true,
+      "cgstRate": 0,
+      "cgstAmount": 0,
+      "utgstRate": 0,
+      "utgstAmount": 0,
+      "igstRate": 5,
+      "igstAmount": 2902.2,
+      "roundOff": -0.2,
+      "grandTotal": 60946,
+      "amountInWords": "SIXTY THOUSAND NINE HUNDRED FORTY SIX ONLY",
+      "bankDetails": {
+        "bankName": "BANK OF BARODA",
+        "branch": "SILVASSA",
+        "accountNo": "26140500010164",
+        "ifsc": "BARB0SILVAS"
+      },
+      "id": "inv-1793465294358",
+      "createdAt": "2026-10-31T16:48:14.358Z"
+    },
+    {
+      "invoiceNo": "2",
+      "invoiceDate": "2026-11-08",
+      "challanId": "ch-1794112261033",
+      "challanNo": "2",
+      "customerId": "cust-1",
+      "customerName": "M/S Pooja Shree Silk & Synthetic",
+      "customerGstin": "27AUBPS4559D1ZH",
+      "billingAddress": "Jayaraj Warehouse Cum textile PARK, Bidg No E-1, Gala No 9/10 Opp pragati Stone, Kalwar village Bhiwandi-421303",
+      "shippingAddress": "Jayaraj Warehouse Cum textile PARK, Bidg No E-1, Gala No 9/10 Opp pragati Stone mills Kalwar village Bhiwandi-421303",
+      "transportMode": "ROADWAYS",
+      "vehicleNo": "DD.01.J.9713",
+      "placeOfSupply": "BHIWANDI",
+      "dateOfSupply": "2026-11-08",
+      "lrNo": "",
+      "description": "Job work charge for Nylon 44/10\nknitted grey fabric challan no: 2",
+      "hsnSac": "998821",
+      "noOfRolls": 33,
+      "quantityKg": 467,
+      "ratePerKg": 42,
+      "taxableAmount": 19614,
+      "isInterState": true,
+      "cgstRate": 0,
+      "cgstAmount": 0,
+      "utgstRate": 0,
+      "utgstAmount": 0,
+      "igstRate": 5,
+      "igstAmount": 980.7,
+      "roundOff": 0.3,
+      "grandTotal": 20595,
+      "amountInWords": "TWENTY THOUSAND FIVE HUNDRED NINETY FIVE ONLY",
+      "bankDetails": {
+        "bankName": "BANK OF BARODA",
+        "branch": "SILVASSA",
+        "accountNo": "26140500010164",
+        "ifsc": "BARB0SILVAS"
+      },
+      "id": "inv-1794112261034",
+      "createdAt": "2026-11-08T04:31:01.034Z"
+    },
+    {
+      "invoiceNo": "3",
+      "invoiceDate": "2026-11-08",
+      "challanId": "ch-1794112729057",
+      "challanNo": "3",
+      "customerId": "cust-1",
+      "customerName": "M/S Pooja Shree Silk & Synthetic",
+      "customerGstin": "27AUBPS4559D1ZH",
+      "billingAddress": "Jayaraj Warehouse Cum textile PARK, Bidg No E-1, Gala No 9/10 Opp pragati Stone, Kalwar village Bhiwandi-421303",
+      "shippingAddress": "Jayaraj Warehouse Cum textile PARK, Bidg No E-1, Gala No 9/10 Opp pragati Stone mills Kalwar village Bhiwandi-421303",
+      "transportMode": "ROADWAYS",
+      "vehicleNo": "DD.01.J.9713",
+      "placeOfSupply": "BHIWANDI",
+      "dateOfSupply": "2026-11-08",
+      "lrNo": "",
+      "description": "Job work charge for Nylon 44/10\nknitted grey fabric challan no: 3",
+      "hsnSac": "998821",
+      "noOfRolls": 7,
+      "quantityKg": 193,
+      "ratePerKg": 42,
+      "taxableAmount": 8106,
+      "isInterState": true,
+      "cgstRate": 0,
+      "cgstAmount": 0,
+      "utgstRate": 0,
+      "utgstAmount": 0,
+      "igstRate": 5,
+      "igstAmount": 405.3,
+      "roundOff": -0.3,
+      "grandTotal": 8511,
+      "amountInWords": "EIGHT THOUSAND FIVE HUNDRED ELEVEN ONLY",
+      "bankDetails": {
+        "bankName": "BANK OF BARODA",
+        "branch": "SILVASSA",
+        "accountNo": "26140500010164",
+        "ifsc": "BARB0SILVAS"
+      },
+      "id": "inv-1794112729060",
+      "createdAt": "2026-11-08T04:38:49.060Z"
+    }
+  ]
+}
