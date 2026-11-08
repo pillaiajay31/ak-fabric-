@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { store } from "@/lib/store";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
@@ -147,21 +150,30 @@ export async function GET(req: Request) {
       a.date.localeCompare(b.date)
     );
 
-    // If single day was selected, also populate the 6 preceding days so the trend graph has rich context
-    if (trendData.length <= 1) {
-      const allDatesMap: Record<string, { date: string; totalKg: number; rolls: number; A: number; B: number; C: number; D: number }> = {};
+    // If single day was selected, show up to 7 preceding active dates leading up to that date for context
+    if (startDate === endDate) {
+      const priorDatesMap: Record<
+        string,
+        { date: string; totalKg: number; rolls: number; A: number; B: number; C: number; D: number }
+      > = {};
       rolls.forEach((r) => {
-        if (!allDatesMap[r.date]) {
-          allDatesMap[r.date] = { date: r.date, totalKg: 0, rolls: 0, A: 0, B: 0, C: 0, D: 0 };
-        }
-        allDatesMap[r.date].totalKg = Number((allDatesMap[r.date].totalKg + r.netWeight).toFixed(2));
-        allDatesMap[r.date].rolls += 1;
-        const mc = (r.machineCode as "A" | "B" | "C" | "D") || "A";
-        if (allDatesMap[r.date][mc] !== undefined) {
-          allDatesMap[r.date][mc] = Number((allDatesMap[r.date][mc] + r.netWeight).toFixed(2));
+        if (r.date <= endDate) {
+          if (!priorDatesMap[r.date]) {
+            priorDatesMap[r.date] = { date: r.date, totalKg: 0, rolls: 0, A: 0, B: 0, C: 0, D: 0 };
+          }
+          priorDatesMap[r.date].totalKg = Number(
+            (priorDatesMap[r.date].totalKg + r.netWeight).toFixed(2)
+          );
+          priorDatesMap[r.date].rolls += 1;
+          const mc = (r.machineCode as "A" | "B" | "C" | "D") || "A";
+          if (priorDatesMap[r.date][mc] !== undefined) {
+            priorDatesMap[r.date][mc] = Number(
+              (priorDatesMap[r.date][mc] + r.netWeight).toFixed(2)
+            );
+          }
         }
       });
-      trendData = Object.values(allDatesMap)
+      trendData = Object.values(priorDatesMap)
         .sort((a, b) => a.date.localeCompare(b.date))
         .slice(-7);
     }

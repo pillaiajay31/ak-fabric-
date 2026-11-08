@@ -26,6 +26,16 @@ export const metadata: Metadata = {
   title: "KnitFlow - Textile Production & Dispatch System | A.K. Fabric",
   description:
     "Textile production tracking, roll weighing, delivery challans, and GST tax invoice generation for A.K. Fabric Silvassa.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "32x32" },
+      { url: "/icon.png", sizes: "192x192" },
+      { url: "/images/ak-fabric-logo-v3.jpg" },
+    ],
+    apple: [
+      { url: "/apple-icon.png", sizes: "180x180" },
+    ],
+  },
 };
 
 export default function RootLayout({

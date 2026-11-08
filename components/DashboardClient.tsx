@@ -207,12 +207,12 @@ export function DashboardClient() {
         url += `?date=${start}`;
       }
 
-      const res = await fetch(url);
+      const res = await fetch(url, { cache: "no-store" });
       const json = await res.json();
       if (json.success) {
         setData(json.data);
-        if (!startDate) setStartDate(json.data.startDate);
-        if (!endDate) setEndDate(json.data.endDate);
+        setStartDate(json.data.startDate);
+        setEndDate(json.data.endDate);
       }
     } catch (e) {
       console.error("Failed to load dashboard data", e);
@@ -258,31 +258,33 @@ export function DashboardClient() {
     if (newPreset !== "custom") {
       setStartDate(s);
       setEndDate(e);
-      startTransition(() => {
-        fetchDashboard(s, e);
-      });
+      fetchDashboard(s, e);
     }
   };
 
   // Handle custom date picker changes
   const handleStartDateChange = (newStart: string) => {
+    if (!newStart) return;
     setStartDate(newStart);
     setPreset("custom");
-    const end = endDate < newStart ? newStart : endDate;
-    if (endDate < newStart) setEndDate(newStart);
-    startTransition(() => {
-      fetchDashboard(newStart, end);
-    });
+    const currentEnd = endDate || newStart;
+    const end = currentEnd < newStart ? newStart : currentEnd;
+    if (currentEnd < newStart) {
+      setEndDate(newStart);
+    }
+    fetchDashboard(newStart, end);
   };
 
   const handleEndDateChange = (newEnd: string) => {
+    if (!newEnd) return;
     setEndDate(newEnd);
     setPreset("custom");
-    const start = startDate > newEnd ? newEnd : startDate;
-    if (startDate > newEnd) setStartDate(newEnd);
-    startTransition(() => {
-      fetchDashboard(start, newEnd);
-    });
+    const currentStart = startDate || newEnd;
+    const start = currentStart > newEnd ? newEnd : currentStart;
+    if (currentStart > newEnd) {
+      setStartDate(newEnd);
+    }
+    fetchDashboard(start, newEnd);
   };
 
   if (!authLoading && !hasPermission("productionDashboard")) {
@@ -411,8 +413,11 @@ export function DashboardClient() {
               />
             </div>
 
-            <div className="px-2.5 py-1 rounded-md bg-blue-50 dark:bg-blue-950/60 border border-blue-200/80 dark:border-blue-900/60 text-[11px] font-semibold text-blue-700 dark:text-blue-300 shadow-xs">
-              {data.daysCount} {data.daysCount === 1 ? "Day" : "Days"}
+            <div className="flex items-center gap-1 px-2.5 py-1 rounded-md bg-blue-50 dark:bg-blue-950/60 border border-blue-200/80 dark:border-blue-900/60 text-[11px] font-semibold text-blue-700 dark:text-blue-300 shadow-xs">
+              {loading && (
+                <RefreshCw className="h-3 w-3 animate-spin text-blue-600 dark:text-blue-400 mr-0.5" />
+              )}
+              <span>{data.daysCount} {data.daysCount === 1 ? "Day" : "Days"}</span>
             </div>
           </div>
         </div>
