@@ -18,7 +18,6 @@ function LoginForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
-  const [showRolesHelper, setShowRolesHelper] = useState(false);
 
   const performLogin = async (loginUser: string, loginPass: string) => {
     try {
@@ -66,20 +65,6 @@ function LoginForm() {
       return;
     }
     performLogin(username, password);
-  };
-
-  const handleAdminQuickLogin = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setUsername("admin");
-    setPassword("admin");
-    performLogin("admin", "admin");
-  };
-
-  const fillQuickAccount = (u: string, p: string) => {
-    setUsername(u);
-    setPassword(p);
-    setError(null);
-    performLogin(u, p);
   };
 
   return (
@@ -195,55 +180,6 @@ function LoginForm() {
           >
             Privacy Policy
           </button>
-
-          <button
-            type="button"
-            onClick={handleAdminQuickLogin}
-            disabled={loading}
-            className="text-neutral-400 hover:text-white underline underline-offset-4 cursor-pointer transition-colors"
-          >
-            Sign In As Admin
-          </button>
-        </div>
-
-        {/* Optional Demo Floor Accounts Toggle */}
-        <div className="pt-3">
-          <button
-            type="button"
-            onClick={() => setShowRolesHelper(!showRolesHelper)}
-            className="text-[11px] text-neutral-400 hover:text-neutral-300 font-medium tracking-wide transition-colors"
-          >
-            {showRolesHelper ? "Hide mill test accounts" : "Switch mill test accounts"}
-          </button>
-
-          {showRolesHelper && (
-            <div className="mt-2.5 p-2 rounded-lg bg-[#1a1920] border border-[#2e2d38] grid grid-cols-3 gap-1.5 text-center text-xs">
-              <button
-                type="button"
-                onClick={() => fillQuickAccount("admin", "admin")}
-                className="p-1.5 rounded bg-[#26252f] hover:bg-[#32313f] text-neutral-200 transition-colors"
-              >
-                <div className="font-semibold text-[11px]">Admin</div>
-                <div className="text-[9px] text-neutral-400 font-mono">admin</div>
-              </button>
-              <button
-                type="button"
-                onClick={() => fillQuickAccount("supervisor", "supervisor")}
-                className="p-1.5 rounded bg-[#26252f] hover:bg-[#32313f] text-neutral-200 transition-colors"
-              >
-                <div className="font-semibold text-[11px]">Supervisor</div>
-                <div className="text-[9px] text-neutral-400 font-mono">supervisor</div>
-              </button>
-              <button
-                type="button"
-                onClick={() => fillQuickAccount("operator", "operator")}
-                className="p-1.5 rounded bg-[#26252f] hover:bg-[#32313f] text-neutral-200 transition-colors"
-              >
-                <div className="font-semibold text-[11px]">Operator</div>
-                <div className="text-[9px] text-neutral-400 font-mono">operator</div>
-              </button>
-            </div>
-          )}
         </div>
 
         <p className="text-[11px] text-neutral-400 pt-2 font-mono">
