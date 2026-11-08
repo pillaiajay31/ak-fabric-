@@ -12,13 +12,10 @@ declare global {
   var mongooseCache: MongooseCache | undefined;
 }
 
-let cached: MongooseCache = global.mongooseCache || {
-  conn: null,
-  promise: null,
-};
+let cached: MongooseCache = (global as any).mongooseCache;
 
 if (!cached) {
-  cached = global.mongooseCache = { conn: null, promise: null };
+  cached = (global as any).mongooseCache = { conn: null, promise: null };
 }
 
 export async function connectMongo(): Promise<typeof mongoose | null> {
@@ -28,7 +25,7 @@ export async function connectMongo(): Promise<typeof mongoose | null> {
     return null;
   }
 
-  if (cached.conn) {
+  if (cached.conn && cached.conn.connection.readyState === 1) {
     return cached.conn;
   }
 
@@ -36,6 +33,9 @@ export async function connectMongo(): Promise<typeof mongoose | null> {
     const opts = {
       bufferCommands: false,
       dbName: "knitflow",
+      serverSelectionTimeoutMS: 5000,
+      connectTimeoutMS: 10000,
+      maxPoolSize: 10,
     };
 
     cached.promise = mongoose.connect(uri, opts).then((mongooseInstance) => {

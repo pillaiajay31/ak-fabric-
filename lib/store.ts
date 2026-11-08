@@ -759,10 +759,15 @@ export const store = {
     const clean = usernameOrEmail.trim().toLowerCase();
     const isMongo = await connectMongo();
     if (isMongo) {
-      await ensureMongoSeeded();
-      const doc = await UserModel.findOne({
+      let doc = await UserModel.findOne({
         $or: [{ username: clean }, { email: clean }],
       }).lean();
+      if (!doc) {
+        await ensureMongoSeeded();
+        doc = await UserModel.findOne({
+          $or: [{ username: clean }, { email: clean }],
+        }).lean();
+      }
       return doc ? mapDoc<UserAccount>(doc) : undefined;
     }
     const db = ensureStoreExists();

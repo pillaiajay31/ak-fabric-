@@ -51,8 +51,7 @@ function LoginForm() {
         else if (userPermissions.masterMachines) target = "/masters/machines";
       }
 
-      router.push(target);
-      router.refresh();
+      window.location.href = target;
     } catch (err) {
       setError((err as Error).message || "An unexpected network error occurred.");
     } finally {
