@@ -55,7 +55,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       // Ignore
     }
     setUser(null);
-    router.push("/login");
+    window.location.href = "/login";
   };
 
   const hasPermission = useCallback(
