@@ -67,7 +67,17 @@ export function MobileBottomNav() {
   if (visibleTabs.length === 0) return null;
 
   return (
-    <div className="print:hidden md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-md border-t border-neutral-200 dark:border-neutral-800 px-2 py-1 shadow-lg">
+    <div
+      className="print:hidden md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-md border-t border-neutral-200 dark:border-neutral-800 px-2 pt-1 shadow-lg"
+      style={{
+        transform: "translate3d(0, 0, 0)",
+        WebkitTransform: "translate3d(0, 0, 0)",
+        willChange: "transform",
+        WebkitBackfaceVisibility: "hidden",
+        backfaceVisibility: "hidden",
+        paddingBottom: "max(0.5rem, env(safe-area-inset-bottom, 8px))",
+      }}
+    >
       <nav className="flex items-center justify-around">
         {visibleTabs.map((tab) => {
           const Icon = tab.icon;
