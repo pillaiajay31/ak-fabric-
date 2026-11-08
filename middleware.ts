@@ -13,6 +13,7 @@ export async function middleware(req: NextRequest) {
     pathname === "/favicon.ico" ||
     pathname === "/login" ||
     pathname === "/api/auth/login" ||
+    pathname === "/api/auth/logout" ||
     pathname.match(/\.(?:jpg|jpeg|png|gif|svg|webp|ico)$/i)
   ) {
     // If user is already logged in and visits /login, redirect to /
