@@ -8,10 +8,12 @@ export async function middleware(req: NextRequest) {
   // Public assets and auth endpoints
   if (
     pathname.startsWith("/_next") ||
+    pathname.startsWith("/images") ||
     pathname.startsWith("/public") ||
     pathname === "/favicon.ico" ||
     pathname === "/login" ||
-    pathname === "/api/auth/login"
+    pathname === "/api/auth/login" ||
+    pathname.match(/\.(?:jpg|jpeg|png|gif|svg|webp|ico)$/i)
   ) {
     // If user is already logged in and visits /login, redirect to /
     if (pathname === "/login") {
@@ -71,7 +73,8 @@ export const config = {
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
+     * - images directory and static image files
      */
-    "/((?!_next/static|_next/image|favicon.ico).*)",
+    "/((?!_next/static|_next/image|favicon.ico|images/|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };
