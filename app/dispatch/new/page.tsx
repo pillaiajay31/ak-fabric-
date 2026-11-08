@@ -377,7 +377,8 @@ export default function NewDispatchPage() {
                 <input
                   type="number"
                   inputMode="decimal"
-                  step="0.5"
+                  step="any"
+                  min="0"
                   value={ratePerKg}
                   onChange={(e) => setRatePerKg(parseFloat(e.target.value) || 0)}
                   className="w-full px-3 py-2.5 sm:py-2 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-950 text-neutral-900 dark:text-white text-base sm:text-xs font-bold"

@@ -426,15 +426,14 @@ export default function ProductionPage() {
                 <div className="relative">
                   <input
                     type="number"
-                    step="0.05"
-                    min="1"
-                    max="100"
+                    step="any"
+                    min="0.01"
                     inputMode="decimal"
                     required
                     autoFocus
                     value={netWeight}
                     onChange={(e) => setNetWeight(e.target.value)}
-                    placeholder="e.g. 18.15"
+                    placeholder="e.g. 18.34"
                     className="w-full px-3 py-3 rounded-xl border-2 border-neutral-950 dark:border-white bg-white dark:bg-neutral-950 text-neutral-950 dark:text-white text-lg font-bold tracking-tight focus:outline-none"
                   />
                   <span className="absolute right-3 top-3 text-xs font-semibold text-neutral-500">
@@ -442,7 +441,7 @@ export default function ProductionPage() {
                   </span>
                 </div>
                 <span className="text-[10px] text-neutral-500 mt-1 block">
-                  Standard roll net weight: 17.50 — 18.50 KG
+                  Net weight in KG (e.g. 18.34)
                 </span>
               </div>
 
@@ -614,8 +613,10 @@ export default function ProductionPage() {
                     </span>
                     <input
                       type="number"
-                      step="0.05"
-                      placeholder="e.g. 18.15"
+                      step="any"
+                      min="0.01"
+                      inputMode="decimal"
+                      placeholder="e.g. 18.34"
                       value={row.weight}
                       onChange={(e) => {
                         const newRows = [...batchRows];
@@ -759,7 +760,8 @@ export default function ProductionPage() {
                       <div className="flex items-center gap-1.5">
                         <input
                           type="number"
-                          step="0.05"
+                          step="any"
+                          min="0.01"
                           inputMode="decimal"
                           value={editWeight}
                           onChange={(e) => setEditWeight(e.target.value)}
@@ -847,7 +849,9 @@ export default function ProductionPage() {
                         <div className="flex items-center gap-1">
                           <input
                             type="number"
-                            step="0.05"
+                            step="any"
+                            min="0.01"
+                            inputMode="decimal"
                             value={editWeight}
                             onChange={(e) => setEditWeight(e.target.value)}
                             className="w-20 px-2 py-1 rounded border border-neutral-950 dark:border-white text-xs font-bold"

@@ -287,12 +287,13 @@ export default function RejectionPage() {
               <div className="relative">
                 <input
                   type="number"
-                  step="0.05"
+                  step="any"
+                  min="0.01"
                   inputMode="decimal"
                   required
                   value={netWeight}
                   onChange={(e) => setNetWeight(e.target.value)}
-                  placeholder="e.g. 12.40"
+                  placeholder="e.g. 18.34"
                   className="w-full px-3 py-2.5 sm:py-2 rounded-lg border-2 border-neutral-900 dark:border-white bg-white dark:bg-neutral-950 text-neutral-950 dark:text-white text-base sm:text-sm font-bold"
                 />
                 <span className="absolute right-3 top-3 sm:top-2.5 text-xs text-neutral-500 font-semibold">
