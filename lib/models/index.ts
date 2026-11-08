@@ -171,6 +171,7 @@ const CompanySchema = new Schema(
 const UserSchema = new Schema(
   {
     username: { type: String, required: true, unique: true, lowercase: true, trim: true },
+    email: { type: String, lowercase: true, trim: true },
     password: { type: String, required: true },
     fullName: { type: String, required: true },
     role: {

@@ -159,6 +159,7 @@ export interface UserPermissions {
 export interface UserAccount {
   id: string;
   username: string;
+  email?: string;
   password?: string;
   fullName: string;
   role: UserRole;

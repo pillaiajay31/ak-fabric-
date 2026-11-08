@@ -162,33 +162,9 @@ export function Navbar() {
     setOpenDropdown((prev) => (prev === key ? null : key));
   };
 
-  // If on login page, render minimal brand bar
+  // If on login page, hide navbar completely for the immersive split screen
   if (pathname === "/login") {
-    return (
-      <header className="sticky top-0 z-40 w-full border-b border-neutral-200 bg-white/95 backdrop-blur-md dark:border-neutral-800 dark:bg-neutral-950/95">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
-            <Link href="/login" className="flex items-center gap-2.5">
-              <div className="h-8 w-8 rounded-lg bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 flex items-center justify-center font-semibold text-sm tracking-tight shadow-sm">
-                KF
-              </div>
-              <div className="flex flex-col">
-                <span className="font-semibold text-base tracking-tight text-neutral-950 dark:text-white">
-                  KnitFlow
-                </span>
-                <span className="text-[11px] font-medium tracking-wide uppercase text-neutral-500">
-                  A.K. Fabric Silvassa
-                </span>
-              </div>
-            </Link>
-
-            <span className="text-xs text-neutral-500 font-medium">
-              Access Protected
-            </span>
-          </div>
-        </div>
-      </header>
-    );
+    return null;
   }
 
   // Filter sections by user permissions

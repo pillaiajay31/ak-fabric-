@@ -136,3 +136,4 @@ export async function verifyPassword(
   const hashed = await hashPassword(plain);
   return hashed === stored;
 }
+

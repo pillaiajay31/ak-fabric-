@@ -2177,7 +2177,8 @@
       "isActive": true,
       "phone": "+91 98251 12345",
       "createdAt": "2026-01-01T00:00:00Z",
-      "lastLoginAt": "2026-11-08T10:19:31.826Z"
+      "lastLoginAt": "2026-11-08T10:28:56.037Z",
+      "email": "admin@akfabric.com"
     },
     {
       "id": "usr-supervisor",
@@ -2198,7 +2199,9 @@
       },
       "isActive": true,
       "phone": "+91 98251 55667",
-      "createdAt": "2026-01-01T00:00:00Z"
+      "createdAt": "2026-01-01T00:00:00Z",
+      "email": "supervisor@akfabric.com",
+      "lastLoginAt": "2026-11-08T10:29:10.255Z"
     },
     {
       "id": "usr-operator",
@@ -2219,7 +2222,8 @@
       },
       "isActive": true,
       "createdAt": "2026-01-01T00:00:00Z",
-      "lastLoginAt": "2026-11-08T10:19:39.604Z"
+      "lastLoginAt": "2026-11-08T10:29:10.250Z",
+      "email": "operator@akfabric.com"
     }
   ]
 }

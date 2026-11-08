@@ -165,6 +165,7 @@ function getInitialSeedData(): KnitFlowDatabase {
     {
       id: "usr-admin",
       username: "admin",
+      email: "admin@akfabric.com",
       password: "admin", // Default password for initial setup
       fullName: "A.K. Administrator",
       role: "admin",
@@ -176,6 +177,7 @@ function getInitialSeedData(): KnitFlowDatabase {
     {
       id: "usr-supervisor",
       username: "supervisor",
+      email: "supervisor@akfabric.com",
       password: "supervisor",
       fullName: "Production Supervisor",
       role: "supervisor",
@@ -187,6 +189,7 @@ function getInitialSeedData(): KnitFlowDatabase {
     {
       id: "usr-operator",
       username: "operator",
+      email: "operator@akfabric.com",
       password: "operator",
       fullName: "Mill Operator",
       role: "operator",
@@ -747,17 +750,21 @@ export const store = {
     return (db.users || []).find((u) => u.id === id);
   },
 
-  async getUserByUsername(username: string): Promise<UserAccount | undefined> {
-    const cleanUsername = username.trim().toLowerCase();
+  async getUserByUsername(usernameOrEmail: string): Promise<UserAccount | undefined> {
+    const clean = usernameOrEmail.trim().toLowerCase();
     const isMongo = await connectMongo();
     if (isMongo) {
       await ensureMongoSeeded();
-      const doc = await UserModel.findOne({ username: cleanUsername }).lean();
+      const doc = await UserModel.findOne({
+        $or: [{ username: clean }, { email: clean }],
+      }).lean();
       return doc ? mapDoc<UserAccount>(doc) : undefined;
     }
     const db = ensureStoreExists();
     return (db.users || []).find(
-      (u) => u.username.toLowerCase() === cleanUsername
+      (u) =>
+        u.username.toLowerCase() === clean ||
+        (u.email && u.email.toLowerCase() === clean)
     );
   },
 
