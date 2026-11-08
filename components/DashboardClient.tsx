@@ -24,11 +24,102 @@ import {
   BarChart,
   Bar,
   CartesianGrid,
+  Cell,
 } from "recharts";
 import { formatIndianCurrency, formatDateIndian } from "@/lib/utils";
 import { CalendarPicker } from "@/components/CalendarPicker";
 import { useAuth } from "@/components/AuthProvider";
 import { AccessDenied } from "@/components/AccessDenied";
+
+const MACHINE_COLOR_MAP: Record<
+  string,
+  {
+    color: string;
+    badge: string;
+    barGradient: string;
+    pill: string;
+    hex: string;
+    border: string;
+  }
+> = {
+  A: {
+    color: "text-blue-600 dark:text-blue-400",
+    badge: "bg-blue-600 text-white",
+    barGradient: "bg-gradient-to-r from-blue-500 to-indigo-600",
+    pill: "bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300 border border-blue-200/70 dark:border-blue-900/60",
+    hex: "#2563eb",
+    border: "hover:border-blue-400/70",
+  },
+  M1: {
+    color: "text-blue-600 dark:text-blue-400",
+    badge: "bg-blue-600 text-white",
+    barGradient: "bg-gradient-to-r from-blue-500 to-indigo-600",
+    pill: "bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300 border border-blue-200/70 dark:border-blue-900/60",
+    hex: "#2563eb",
+    border: "hover:border-blue-400/70",
+  },
+  B: {
+    color: "text-purple-600 dark:text-purple-400",
+    badge: "bg-purple-600 text-white",
+    barGradient: "bg-gradient-to-r from-purple-500 to-pink-500",
+    pill: "bg-purple-50 text-purple-700 dark:bg-purple-950/60 dark:text-purple-300 border border-purple-200/70 dark:border-purple-900/60",
+    hex: "#9333ea",
+    border: "hover:border-purple-400/70",
+  },
+  M2: {
+    color: "text-purple-600 dark:text-purple-400",
+    badge: "bg-purple-600 text-white",
+    barGradient: "bg-gradient-to-r from-purple-500 to-pink-500",
+    pill: "bg-purple-50 text-purple-700 dark:bg-purple-950/60 dark:text-purple-300 border border-purple-200/70 dark:border-purple-900/60",
+    hex: "#9333ea",
+    border: "hover:border-purple-400/70",
+  },
+  C: {
+    color: "text-emerald-600 dark:text-emerald-400",
+    badge: "bg-emerald-600 text-white",
+    barGradient: "bg-gradient-to-r from-emerald-500 to-teal-500",
+    pill: "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200/70 dark:border-emerald-900/60",
+    hex: "#059669",
+    border: "hover:border-emerald-400/70",
+  },
+  M3: {
+    color: "text-emerald-600 dark:text-emerald-400",
+    badge: "bg-emerald-600 text-white",
+    barGradient: "bg-gradient-to-r from-emerald-500 to-teal-500",
+    pill: "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200/70 dark:border-emerald-900/60",
+    hex: "#059669",
+    border: "hover:border-emerald-400/70",
+  },
+  D: {
+    color: "text-amber-600 dark:text-amber-400",
+    badge: "bg-amber-600 text-white",
+    barGradient: "bg-gradient-to-r from-amber-500 to-orange-500",
+    pill: "bg-amber-50 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-200/70 dark:border-amber-900/60",
+    hex: "#d97706",
+    border: "hover:border-amber-400/70",
+  },
+  M4: {
+    color: "text-amber-600 dark:text-amber-400",
+    badge: "bg-amber-600 text-white",
+    barGradient: "bg-gradient-to-r from-amber-500 to-orange-500",
+    pill: "bg-amber-50 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-200/70 dark:border-amber-900/60",
+    hex: "#d97706",
+    border: "hover:border-amber-400/70",
+  },
+};
+
+function getMachineTheme(code: string) {
+  return (
+    MACHINE_COLOR_MAP[code] || {
+      color: "text-blue-600 dark:text-blue-400",
+      badge: "bg-neutral-800 text-white dark:bg-neutral-200 dark:text-neutral-900",
+      barGradient: "bg-gradient-to-r from-blue-500 to-indigo-600",
+      pill: "bg-neutral-100 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-200",
+      hex: "#2563eb",
+      border: "hover:border-blue-400/70",
+    }
+  );
+}
 
 type DatePreset = "today" | "yesterday" | "last7" | "thisMonth" | "custom";
 
@@ -246,7 +337,7 @@ export function DashboardClient() {
 
             <Link
               href="/production"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 text-xs font-semibold hover:opacity-90 transition-opacity shadow-sm"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white text-xs font-semibold shadow-sm shadow-blue-500/25 transition-all"
             >
               <Plus className="h-3.5 w-3.5" />
               <span>Add Roll</span>
@@ -254,7 +345,7 @@ export function DashboardClient() {
 
             <Link
               href="/dispatch/new"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white text-xs font-semibold hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors shadow-sm"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white text-xs font-semibold shadow-sm shadow-emerald-500/25 transition-all"
             >
               <Truck className="h-3.5 w-3.5" />
               <span>New Challan</span>
@@ -267,7 +358,7 @@ export function DashboardClient() {
           {/* Preset Buttons */}
           <div className="flex flex-wrap items-center gap-1.5">
             <span className="text-xs font-medium text-neutral-500 mr-1 flex items-center gap-1">
-              <CalendarRange className="h-3.5 w-3.5" />
+              <CalendarRange className="h-3.5 w-3.5 text-blue-500" />
               <span>Range:</span>
             </span>
 
@@ -286,9 +377,9 @@ export function DashboardClient() {
                   key={p.id}
                   type="button"
                   onClick={() => applyPreset(p.id)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                     isSelected
-                      ? "bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 shadow-sm"
+                      ? "bg-blue-600 text-white shadow-sm shadow-blue-500/20"
                       : "bg-white text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 border border-neutral-200 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-400 dark:hover:text-white"
                   }`}
                 >
@@ -320,22 +411,23 @@ export function DashboardClient() {
               />
             </div>
 
-            <div className="px-2.5 py-1 rounded bg-neutral-100 dark:bg-neutral-800 text-[11px] font-semibold text-neutral-600 dark:text-neutral-300">
+            <div className="px-2.5 py-1 rounded-md bg-blue-50 dark:bg-blue-950/60 border border-blue-200/80 dark:border-blue-900/60 text-[11px] font-semibold text-blue-700 dark:text-blue-300 shadow-xs">
               {data.daysCount} {data.daysCount === 1 ? "Day" : "Days"}
             </div>
           </div>
         </div>
       </div>
 
-      {/* Top 4 KPI Cards */}
+      {/* Top 4 KPI Cards with Tasteful Color Accents */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {/* Total Production in Selected Period */}
-        <div className="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5 shadow-sm">
+        {/* Total Production in Selected Period (Electric Blue) */}
+        <div className="rounded-xl border border-neutral-200/80 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5 shadow-sm hover:border-blue-400/60 dark:hover:border-blue-700/60 transition-colors relative overflow-hidden group">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-indigo-600 opacity-80" />
           <div className="flex items-center justify-between">
-            <span className="text-xs font-medium uppercase tracking-wider text-neutral-500">
+            <span className="text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
               {isRange ? "Production in Period" : "Produced on Date"}
             </span>
-            <div className="h-8 w-8 rounded-lg bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center text-neutral-700 dark:text-neutral-300">
+            <div className="h-9 w-9 rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200/60 dark:border-blue-900/60 flex items-center justify-center text-blue-600 dark:text-blue-400 shadow-xs">
               <Layers className="h-4 w-4" />
             </div>
           </div>
@@ -343,23 +435,24 @@ export function DashboardClient() {
             <span className="text-3xl font-bold tracking-tight text-neutral-950 dark:text-white">
               {formatIndianCurrency(data.periodKg)}
             </span>
-            <span className="text-sm font-medium text-neutral-500">KG</span>
+            <span className="text-sm font-semibold text-blue-600 dark:text-blue-400">KG</span>
           </div>
           <div className="mt-2 flex items-center justify-between text-xs text-neutral-500 pt-2 border-t border-neutral-100 dark:border-neutral-800/60">
             <span>Rolls Count</span>
-            <span className="font-semibold text-neutral-900 dark:text-neutral-200">
+            <span className="font-semibold text-blue-700 dark:text-blue-300">
               {data.periodCount} rolls
             </span>
           </div>
         </div>
 
-        {/* Best Performing Machine in Period */}
-        <div className="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5 shadow-sm">
+        {/* Best Performing Machine in Period (Warm Amber / Gold) */}
+        <div className="rounded-xl border border-neutral-200/80 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5 shadow-sm hover:border-amber-400/60 dark:hover:border-amber-700/60 transition-colors relative overflow-hidden group">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 to-amber-600 opacity-80" />
           <div className="flex items-center justify-between">
-            <span className="text-xs font-medium uppercase tracking-wider text-neutral-500">
+            <span className="text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
               {isRange ? "Top Machine in Period" : "Top Machine Today"}
             </span>
-            <div className="h-8 w-8 rounded-lg bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center text-neutral-900 dark:text-neutral-100">
+            <div className="h-9 w-9 rounded-xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200/60 dark:border-amber-900/60 flex items-center justify-center text-amber-600 dark:text-amber-400 shadow-xs">
               <Award className="h-4 w-4" />
             </div>
           </div>
@@ -368,14 +461,14 @@ export function DashboardClient() {
               {data.bestMachine ? `Machine ${data.bestMachine.code}` : "None"}
             </span>
             {data.bestMachine && (
-              <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300">
+              <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-200 border border-amber-200 dark:border-amber-800/60 shadow-xs">
                 Top Line
               </span>
             )}
           </div>
           <div className="mt-2 flex items-center justify-between text-xs text-neutral-500 pt-2 border-t border-neutral-100 dark:border-neutral-800/60">
             <span>Period Output</span>
-            <span className="font-semibold text-neutral-900 dark:text-neutral-200">
+            <span className="font-semibold text-amber-700 dark:text-amber-300">
               {data.bestMachine
                 ? `${formatIndianCurrency(data.bestMachine.weight)} KG (${data.bestMachine.rolls} rolls)`
                 : "No rolls logged"}
@@ -383,13 +476,14 @@ export function DashboardClient() {
           </div>
         </div>
 
-        {/* Warehouse In-Stock Inventory */}
-        <div className="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5 shadow-sm">
+        {/* Warehouse In-Stock Inventory (Emerald Green) */}
+        <div className="rounded-xl border border-neutral-200/80 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5 shadow-sm hover:border-emerald-400/60 dark:hover:border-emerald-700/60 transition-colors relative overflow-hidden group">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-400 to-teal-500 opacity-80" />
           <div className="flex items-center justify-between">
-            <span className="text-xs font-medium uppercase tracking-wider text-neutral-500">
+            <span className="text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
               In-Stock Warehouse
             </span>
-            <div className="h-8 w-8 rounded-lg bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center text-neutral-700 dark:text-neutral-300">
+            <div className="h-9 w-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/60 dark:border-emerald-900/60 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shadow-xs">
               <Box className="h-4 w-4" />
             </div>
           </div>
@@ -397,35 +491,53 @@ export function DashboardClient() {
             <span className="text-3xl font-bold tracking-tight text-neutral-950 dark:text-white">
               {formatIndianCurrency(data.inStock.weight)}
             </span>
-            <span className="text-sm font-medium text-neutral-500">KG</span>
+            <span className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">KG</span>
           </div>
           <div className="mt-2 flex items-center justify-between text-xs text-neutral-500 pt-2 border-t border-neutral-100 dark:border-neutral-800/60">
-            <span>Ready for Challan</span>
-            <span className="font-semibold text-neutral-900 dark:text-neutral-200">
-              {data.inStock.rolls} rolls available
+            <span className="inline-flex items-center gap-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Ready for Challan</span>
+            </span>
+            <span className="font-semibold text-emerald-700 dark:text-emerald-300">
+              {data.inStock.rolls} rolls ready
             </span>
           </div>
         </div>
 
-        {/* Rejection / Wastage in Period */}
-        <div className="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5 shadow-sm">
+        {/* Rejection / Wastage in Period (Coral / Rose) */}
+        <div className="rounded-xl border border-neutral-200/80 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5 shadow-sm hover:border-rose-400/60 dark:hover:border-rose-700/60 transition-colors relative overflow-hidden group">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-400 to-red-500 opacity-80" />
           <div className="flex items-center justify-between">
-            <span className="text-xs font-medium uppercase tracking-wider text-neutral-500">
+            <span className="text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
               Rejection Rate
             </span>
-            <div className="h-8 w-8 rounded-lg bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center text-neutral-700 dark:text-neutral-300">
+            <div className="h-9 w-9 rounded-xl bg-rose-50 dark:bg-rose-950/60 border border-rose-200/60 dark:border-rose-900/60 flex items-center justify-center text-rose-600 dark:text-rose-400 shadow-xs">
               <AlertCircle className="h-4 w-4" />
             </div>
           </div>
           <div className="mt-4 flex items-baseline gap-2">
-            <span className="text-3xl font-bold tracking-tight text-neutral-950 dark:text-white">
+            <span
+              className={`text-3xl font-bold tracking-tight ${
+                data.rejection.ratePercent > 0
+                  ? "text-rose-600 dark:text-rose-400"
+                  : "text-neutral-950 dark:text-white"
+              }`}
+            >
               {data.rejection.ratePercent}%
             </span>
-            <span className="text-xs font-medium text-neutral-500">of period batch</span>
+            <span className="text-xs font-medium text-neutral-500">
+              {data.rejection.ratePercent === 0 ? "Zero Defect" : "of period batch"}
+            </span>
           </div>
           <div className="mt-2 flex items-center justify-between text-xs text-neutral-500 pt-2 border-t border-neutral-100 dark:border-neutral-800/60">
             <span>Wastage Weight</span>
-            <span className="font-semibold text-neutral-900 dark:text-neutral-200">
+            <span
+              className={`font-semibold ${
+                data.rejection.periodKg > 0
+                  ? "text-rose-600 dark:text-rose-400"
+                  : "text-neutral-700 dark:text-neutral-300"
+              }`}
+            >
               {formatIndianCurrency(data.rejection.periodKg)} KG in range
             </span>
           </div>
@@ -450,23 +562,26 @@ export function DashboardClient() {
             const isBest = data.bestMachine?.code === mc.code && mc.weight > 0;
             const target = mc.target || 450 * data.daysCount;
             const progress = Math.min(100, Math.round((mc.weight / target) * 100));
+            const theme = getMachineTheme(mc.code);
 
             return (
               <div
                 key={mc.code}
                 className={`rounded-xl border p-4 bg-white dark:bg-neutral-900 transition-all shadow-sm ${
                   isBest
-                    ? "border-neutral-950 dark:border-white ring-1 ring-neutral-950 dark:ring-white"
-                    : "border-neutral-200 dark:border-neutral-800"
+                    ? "border-amber-400 dark:border-amber-500/80 ring-2 ring-amber-400/30 bg-gradient-to-b from-amber-50/40 via-white to-white dark:from-amber-950/20 dark:via-neutral-900 dark:to-neutral-900"
+                    : `border-neutral-200/80 dark:border-neutral-800 ${theme.border}`
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="h-7 w-7 rounded-md bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 flex items-center justify-center font-bold text-xs">
+                  <div className="flex items-center gap-2.5">
+                    <span
+                      className={`h-8 w-8 rounded-lg ${theme.badge} flex items-center justify-center font-bold text-xs shadow-xs`}
+                    >
                       {mc.code}
                     </span>
                     <div>
-                      <span className="text-xs font-semibold text-neutral-900 dark:text-white block">
+                      <span className="text-xs font-bold text-neutral-950 dark:text-white block">
                         Machine {mc.code}
                       </span>
                       <span className="text-[10px] text-neutral-500 block">
@@ -476,7 +591,7 @@ export function DashboardClient() {
                   </div>
 
                   {isBest && (
-                    <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded bg-neutral-900 text-white dark:bg-white dark:text-neutral-900">
+                    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-xs">
                       Best
                     </span>
                   )}
@@ -486,36 +601,36 @@ export function DashboardClient() {
                   <div className="flex items-baseline justify-between">
                     <span className="text-2xl font-bold tracking-tight text-neutral-950 dark:text-white">
                       {formatIndianCurrency(mc.weight)}
-                      <span className="text-xs font-normal text-neutral-500 ml-1">
+                      <span className="text-xs font-semibold text-neutral-500 ml-1">
                         KG
                       </span>
                     </span>
-                    <span className="text-xs font-medium text-neutral-500">
+                    <span className="text-xs font-semibold text-neutral-600 dark:text-neutral-400">
                       {mc.rolls} rolls
                     </span>
                   </div>
 
-                  {/* Target Progress */}
+                  {/* Target Progress Bar */}
                   <div className="mt-3">
-                    <div className="flex justify-between text-[11px] text-neutral-500 mb-1">
+                    <div className="flex justify-between text-[11px] text-neutral-500 mb-1.5">
                       <span>Target: {formatIndianCurrency(target)} KG</span>
-                      <span className="font-semibold text-neutral-700 dark:text-neutral-300">
+                      <span className="font-bold text-neutral-900 dark:text-neutral-200">
                         {progress}%
                       </span>
                     </div>
-                    <div className="w-full h-1.5 rounded-full bg-neutral-100 dark:bg-neutral-800 overflow-hidden">
+                    <div className="w-full h-2 rounded-full bg-neutral-100 dark:bg-neutral-800 overflow-hidden p-0.5">
                       <div
-                        className="h-full bg-neutral-900 dark:bg-white rounded-full transition-all duration-500"
+                        className={`h-full ${theme.barGradient} rounded-full transition-all duration-500 shadow-xs`}
                         style={{ width: `${progress}%` }}
                       />
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between">
+                <div className="mt-4 pt-3 border-t border-neutral-100 dark:border-neutral-800/70 flex items-center justify-between">
                   <Link
                     href={`/production?machine=${mc.code}`}
-                    className="text-xs font-medium text-neutral-600 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white inline-flex items-center gap-1"
+                    className={`text-xs font-semibold ${theme.color} hover:opacity-80 inline-flex items-center gap-1 transition-opacity`}
                   >
                     <span>Log Roll</span>
                     <ArrowRight className="h-3 w-3" />
@@ -534,7 +649,7 @@ export function DashboardClient() {
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="text-sm font-semibold tracking-tight text-neutral-900 dark:text-white flex items-center gap-2">
-                <TrendingUp className="h-4 w-4 text-neutral-500" />
+                <TrendingUp className="h-4 w-4 text-blue-600 dark:text-blue-400" />
                 <span>Production Trend (Net Weight in KG)</span>
               </h3>
               <p className="text-xs text-neutral-500">
@@ -551,14 +666,15 @@ export function DashboardClient() {
               >
                 <defs>
                   <linearGradient id="colorTotal" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#18181b" stopOpacity={0.2} />
-                    <stop offset="95%" stopColor="#18181b" stopOpacity={0.0} />
+                    <stop offset="5%" stopColor="#2563eb" stopOpacity={0.35} />
+                    <stop offset="95%" stopColor="#2563eb" stopOpacity={0.0} />
                   </linearGradient>
                 </defs>
                 <CartesianGrid
                   strokeDasharray="3 3"
                   vertical={false}
-                  stroke="#e5e5e5"
+                  stroke="#e5e7eb"
+                  className="dark:opacity-20"
                 />
                 <XAxis
                   dataKey="date"
@@ -578,18 +694,21 @@ export function DashboardClient() {
                     if (active && payload && payload.length) {
                       const item = payload[0].payload;
                       return (
-                        <div className="rounded-lg border border-neutral-200 bg-white p-2.5 shadow-md dark:border-neutral-800 dark:bg-neutral-950 text-xs">
-                          <p className="font-semibold text-neutral-900 dark:text-white">
+                        <div className="rounded-xl border border-blue-200/60 bg-white/95 backdrop-blur-sm p-3 shadow-lg dark:border-neutral-800 dark:bg-neutral-900/95 text-xs">
+                          <p className="font-bold text-neutral-900 dark:text-white">
                             {formatDateIndian(item.date)}
                           </p>
-                          <p className="text-neutral-600 dark:text-neutral-400 mt-1">
-                            Total:{" "}
-                            <span className="font-semibold text-neutral-950 dark:text-white">
+                          <p className="text-neutral-600 dark:text-neutral-400 mt-1 flex items-center justify-between gap-3">
+                            <span>Total Output:</span>
+                            <span className="font-bold text-blue-600 dark:text-blue-400">
                               {formatIndianCurrency(item.totalKg)} KG
                             </span>
                           </p>
-                          <p className="text-neutral-500 mt-0.5">
-                            Rolls: {item.rolls}
+                          <p className="text-neutral-500 mt-0.5 flex items-center justify-between gap-3">
+                            <span>Rolls:</span>
+                            <span className="font-semibold text-neutral-900 dark:text-neutral-200">
+                              {item.rolls}
+                            </span>
                           </p>
                         </div>
                       );
@@ -600,8 +719,10 @@ export function DashboardClient() {
                 <Area
                   type="monotone"
                   dataKey="totalKg"
-                  stroke="#18181b"
-                  strokeWidth={2}
+                  stroke="#2563eb"
+                  strokeWidth={2.5}
+                  dot={{ r: 3, fill: "#2563eb", stroke: "#ffffff", strokeWidth: 1.5 }}
+                  activeDot={{ r: 5, fill: "#2563eb", stroke: "#ffffff", strokeWidth: 2 }}
                   fillOpacity={1}
                   fill="url(#colorTotal)"
                 />
@@ -611,7 +732,7 @@ export function DashboardClient() {
         </div>
 
         {/* Machine Comparison Bar Chart (1 Col) */}
-        <div className="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5 shadow-sm">
+        <div className="rounded-xl border border-neutral-200/80 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5 shadow-sm">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="text-sm font-semibold tracking-tight text-neutral-900 dark:text-white">
@@ -632,7 +753,8 @@ export function DashboardClient() {
                 <CartesianGrid
                   strokeDasharray="3 3"
                   vertical={false}
-                  stroke="#e5e5e5"
+                  stroke="#e5e7eb"
+                  className="dark:opacity-20"
                 />
                 <XAxis
                   dataKey="code"
@@ -646,19 +768,26 @@ export function DashboardClient() {
                   content={({ active, payload }) => {
                     if (active && payload && payload.length) {
                       const item = payload[0].payload;
+                      const theme = getMachineTheme(item.code);
                       return (
-                        <div className="rounded-lg border border-neutral-200 bg-white p-2.5 shadow-md dark:border-neutral-800 dark:bg-neutral-950 text-xs">
-                          <p className="font-semibold text-neutral-900 dark:text-white">
-                            Machine {item.code}
-                          </p>
-                          <p className="text-neutral-600 dark:text-neutral-400 mt-1">
-                            Production:{" "}
-                            <span className="font-semibold text-neutral-950 dark:text-white">
+                        <div className="rounded-xl border border-neutral-200 bg-white/95 backdrop-blur-sm p-3 shadow-lg dark:border-neutral-800 dark:bg-neutral-900/95 text-xs">
+                          <div className="flex items-center gap-2">
+                            <span className={`h-2.5 w-2.5 rounded-full`} style={{ backgroundColor: theme.hex }} />
+                            <p className="font-bold text-neutral-900 dark:text-white">
+                              Machine {item.code}
+                            </p>
+                          </div>
+                          <p className="text-neutral-600 dark:text-neutral-400 mt-1 flex items-center justify-between gap-3">
+                            <span>Production:</span>
+                            <span className={`font-bold ${theme.color}`}>
                               {formatIndianCurrency(item.weight)} KG
                             </span>
                           </p>
-                          <p className="text-neutral-500 mt-0.5">
-                            Rolls: {item.rolls}
+                          <p className="text-neutral-500 mt-0.5 flex items-center justify-between gap-3">
+                            <span>Rolls:</span>
+                            <span className="font-semibold text-neutral-900 dark:text-neutral-200">
+                              {item.rolls}
+                            </span>
                           </p>
                         </div>
                       );
@@ -668,10 +797,13 @@ export function DashboardClient() {
                 />
                 <Bar
                   dataKey="weight"
-                  fill="#27272a"
-                  radius={[4, 4, 0, 0]}
-                  maxBarSize={38}
-                />
+                  radius={[6, 6, 0, 0]}
+                  maxBarSize={42}
+                >
+                  {data.machineStats.map((item, idx) => (
+                    <Cell key={`cell-${idx}`} fill={getMachineTheme(item.code).hex} />
+                  ))}
+                </Bar>
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -712,53 +844,67 @@ export function DashboardClient() {
               </tr>
             </thead>
             <tbody className="divide-y divide-neutral-200 dark:divide-neutral-800">
-              {data.recentRolls.map((roll) => (
-                <tr
-                  key={roll.id}
-                  className="hover:bg-neutral-50 dark:hover:bg-neutral-800/40 transition-colors"
-                >
-                  <td className="px-4 py-3 font-semibold text-neutral-900 dark:text-white">
-                    {roll.rollNo}
-                  </td>
-                  <td className="px-4 py-3">
-                    <span className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200">
-                      Machine {roll.machineCode}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 font-semibold text-neutral-900 dark:text-white">
-                    {roll.netWeight.toFixed(2)} KG
-                  </td>
-                  <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">
-                    {formatDateIndian(roll.date)}
-                  </td>
-                  <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">
-                    {roll.shift}
-                  </td>
-                  <td className="px-4 py-3">
-                    {roll.status === "dispatched" ? (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300">
-                        Dispatched
-                      </span>
-                    ) : (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-neutral-900 text-white dark:bg-white dark:text-neutral-900">
-                        In Stock
-                      </span>
-                    )}
-                  </td>
-                  <td className="px-4 py-3 text-right text-neutral-500">
-                    {roll.challanNo ? (
-                      <Link
-                        href={`/dispatch/challan/${roll.challanNo}`}
-                        className="underline hover:text-neutral-900 dark:hover:text-white"
+              {data.recentRolls.map((roll) => {
+                const theme = getMachineTheme(roll.machineCode);
+                return (
+                  <tr
+                    key={roll.id}
+                    className="hover:bg-neutral-50/80 dark:hover:bg-neutral-800/40 transition-colors"
+                  >
+                    <td className="px-4 py-3 font-semibold text-neutral-900 dark:text-white">
+                      {roll.rollNo}
+                    </td>
+                    <td className="px-4 py-3">
+                      <span
+                        className={`inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold ${theme.pill}`}
                       >
-                        Challan #{roll.challanNo}
-                      </Link>
-                    ) : (
-                      "—"
-                    )}
-                  </td>
-                </tr>
-              ))}
+                        Machine {roll.machineCode}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 font-bold text-neutral-900 dark:text-white">
+                      {roll.netWeight.toFixed(2)} KG
+                    </td>
+                    <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">
+                      {formatDateIndian(roll.date)}
+                    </td>
+                    <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">
+                      <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300">
+                        {roll.shift}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3">
+                      {roll.status === "dispatched" ? (
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300 border border-blue-200/70 dark:border-blue-900/60">
+                          <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+                          <span>Dispatched</span>
+                        </span>
+                      ) : roll.status === "rejected" ? (
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-rose-50 text-rose-700 dark:bg-rose-950/60 dark:text-rose-300 border border-rose-200/70 dark:border-rose-900/60">
+                          <span className="h-1.5 w-1.5 rounded-full bg-rose-500" />
+                          <span>Rejected</span>
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-200/70 dark:border-emerald-900/60">
+                          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                          <span>In Stock</span>
+                        </span>
+                      )}
+                    </td>
+                    <td className="px-4 py-3 text-right text-neutral-500">
+                      {roll.challanNo ? (
+                        <Link
+                          href={`/dispatch/challan/${roll.challanNo}`}
+                          className="font-medium text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 underline"
+                        >
+                          Challan #{roll.challanNo}
+                        </Link>
+                      ) : (
+                        "—"
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
               {data.recentRolls.length === 0 && (
                 <tr>
                   <td colSpan={7} className="px-4 py-8 text-center text-neutral-500">
