@@ -30,7 +30,7 @@ KnitFlow is a modern, minimalist production and dispatch management platform bui
   - **Supervisor**: Username: `supervisor` | Password: `supervisor` (Production Dashboard, Roll Entry, Rejections, Machine Master)
   - **Operator**: Username: `operator` | Password: `operator` (Floor Roll Entry only)
 
-### 2. Summary Dashboard (`/`)
+### 3. Summary Dashboard (`/`)
 - **Today's Overall Production**: Total weight (KG) and roll count produced today across all machines.
 - **Top Performing Machine**: Identifies which machine generated the highest fabric output today.
 - **Machine Fleet Progress**: Real-time progress bars tracking each machine against its daily target.
@@ -39,14 +39,14 @@ KnitFlow is a modern, minimalist production and dispatch management platform bui
   - Machine Output Comparison (Bar chart comparing line performance).
 - **Inventory & Rejection Metrics**: Live in-stock roll count ready for dispatch and floor defect rate.
 
-### 3. Production Entry & Rejection Logging
+### 4. Production Entry & Rejection Logging
 - **Production Entry (`/production`)**:
-  - **Single Roll Entry**: Tap Machine (A, B, C, D), auto-suggests next roll number (e.g. `C.1665`), enter net weight in KG, pick Shift (Day/Night), and save.
+  - **Single Roll Entry**: Tap Machine (A, B, C, D), auto-suggests next roll number (e.g. `C.1665`), enter net weight in KG, and save.
   - **Batch Weigh-In Mode**: Designed for floor supervisors weighing 10-30 rolls back-to-back with automatic sequential numbering.
 - **Fabric Rejection Log (`/rejection`)**:
   - Record off-quality rolls or cut pieces with defect classifications (Oil Stain, Yarn Breakage, Hole/Needle Drop, GSM Variation, etc.) and disposition (Scrap, Recycled, B-Grade Sale).
 
-### 4. Dispatch, Delivery Challan & Tax Invoice (`/dispatch`)
+### 5. Dispatch, Delivery Challan & Tax Invoice (`/dispatch`)
 - **New Dispatch Generator (`/dispatch/new`)**:
   - Select customer from master.
   - Required Transport Inputs:
