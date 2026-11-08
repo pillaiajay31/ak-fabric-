@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import mongoose from "mongoose";
 import {
   Machine,
   Customer,
@@ -285,6 +286,20 @@ async function ensureMongoSeeded() {
   }
 }
 
+function makeSafeQuery(id: string, extraFields: string[] = []): Record<string, any> {
+  const orList: any[] = [];
+  if (id && mongoose.isValidObjectId(id)) {
+    orList.push({ _id: id });
+  }
+  if (id) {
+    orList.push({ id });
+    for (const field of extraFields) {
+      orList.push({ [field]: id });
+    }
+  }
+  return orList.length === 1 ? orList[0] : { $or: orList };
+}
+
 function mapDoc<T>(doc: any): T {
   if (!doc) return doc;
   const obj = doc.toObject ? doc.toObject() : { ...doc };
@@ -364,7 +379,7 @@ export const store = {
     const isMongo = await connectMongo();
     if (isMongo) {
       const doc = await MachineModel.findOneAndUpdate(
-        { $or: [{ _id: id }, { code: id }] },
+        makeSafeQuery(id, ["code"]),
         updates,
         { new: true }
       ).lean();
@@ -381,7 +396,7 @@ export const store = {
   async deleteMachine(id: string): Promise<boolean> {
     const isMongo = await connectMongo();
     if (isMongo) {
-      const res = await MachineModel.deleteOne({ $or: [{ _id: id }, { code: id }] });
+      const res = await MachineModel.deleteOne(makeSafeQuery(id, ["code"]));
       return res.deletedCount > 0;
     }
     const db = ensureStoreExists();
@@ -409,9 +424,7 @@ export const store = {
   async getCustomerById(id: string): Promise<Customer | undefined> {
     const isMongo = await connectMongo();
     if (isMongo) {
-      const doc = await CustomerModel.findOne({
-        $or: [{ _id: id }, { id: id }],
-      }).lean();
+      const doc = await CustomerModel.findOne(makeSafeQuery(id, ["gstin"])).lean();
       return doc ? mapDoc<Customer>(doc) : undefined;
     }
     const db = ensureStoreExists();
@@ -442,7 +455,7 @@ export const store = {
     const isMongo = await connectMongo();
     if (isMongo) {
       const doc = await CustomerModel.findOneAndUpdate(
-        { $or: [{ _id: id }, { id: id }] },
+        makeSafeQuery(id, ["gstin"]),
         updates,
         { new: true }
       ).lean();
@@ -459,7 +472,7 @@ export const store = {
   async deleteCustomer(id: string): Promise<boolean> {
     const isMongo = await connectMongo();
     if (isMongo) {
-      const res = await CustomerModel.deleteOne({ $or: [{ _id: id }, { id: id }] });
+      const res = await CustomerModel.deleteOne(makeSafeQuery(id, ["gstin"]));
       return res.deletedCount > 0;
     }
     const db = ensureStoreExists();
@@ -530,7 +543,7 @@ export const store = {
     const isMongo = await connectMongo();
     if (isMongo) {
       const doc = await RollModel.findOneAndUpdate(
-        { $or: [{ _id: id }, { rollNo: id }, { id: id }] },
+        makeSafeQuery(id, ["rollNo"]),
         updates,
         { new: true }
       ).lean();
@@ -547,9 +560,7 @@ export const store = {
   async deleteRoll(id: string): Promise<boolean> {
     const isMongo = await connectMongo();
     if (isMongo) {
-      const res = await RollModel.deleteOne({
-        $or: [{ _id: id }, { rollNo: id }, { id: id }],
-      });
+      const res = await RollModel.deleteOne(makeSafeQuery(id, ["rollNo"]));
       return res.deletedCount > 0;
     }
     const db = ensureStoreExists();
@@ -596,7 +607,7 @@ export const store = {
   async deleteRejection(id: string): Promise<boolean> {
     const isMongo = await connectMongo();
     if (isMongo) {
-      const res = await RejectionModel.deleteOne({ $or: [{ _id: id }, { id: id }] });
+      const res = await RejectionModel.deleteOne(makeSafeQuery(id));
       return res.deletedCount > 0;
     }
     const db = ensureStoreExists();
@@ -623,9 +634,7 @@ export const store = {
   async getChallanById(id: string): Promise<DeliveryChallan | undefined> {
     const isMongo = await connectMongo();
     if (isMongo) {
-      const doc = await ChallanModel.findOne({
-        $or: [{ _id: id }, { challanNo: id }, { id: id }],
-      }).lean();
+      const doc = await ChallanModel.findOne(makeSafeQuery(id, ["challanNo"])).lean();
       return doc ? mapDoc<DeliveryChallan>(doc) : undefined;
     }
     const db = ensureStoreExists();
@@ -695,9 +704,7 @@ export const store = {
   async getInvoiceById(id: string): Promise<TaxInvoice | undefined> {
     const isMongo = await connectMongo();
     if (isMongo) {
-      const doc = await InvoiceModel.findOne({
-        $or: [{ _id: id }, { invoiceNo: id }, { id: id }],
-      }).lean();
+      const doc = await InvoiceModel.findOne(makeSafeQuery(id, ["invoiceNo"])).lean();
       return doc ? mapDoc<TaxInvoice>(doc) : undefined;
     }
     const db = ensureStoreExists();
@@ -741,9 +748,7 @@ export const store = {
     const isMongo = await connectMongo();
     if (isMongo) {
       await ensureMongoSeeded();
-      const doc = await UserModel.findOne({
-        $or: [{ _id: id }, { id: id }],
-      }).lean();
+      const doc = await UserModel.findOne(makeSafeQuery(id, ["username"])).lean();
       return doc ? mapDoc<UserAccount>(doc) : undefined;
     }
     const db = ensureStoreExists();
@@ -806,7 +811,7 @@ export const store = {
 
     if (isMongo) {
       const doc = await UserModel.findOneAndUpdate(
-        { $or: [{ _id: id }, { id: id }] },
+        makeSafeQuery(id, ["username"]),
         cleanUpdates,
         { new: true }
       ).lean();
@@ -825,7 +830,7 @@ export const store = {
   async deleteUser(id: string): Promise<boolean> {
     const isMongo = await connectMongo();
     if (isMongo) {
-      const res = await UserModel.deleteOne({ $or: [{ _id: id }, { id: id }] });
+      const res = await UserModel.deleteOne(makeSafeQuery(id, ["username"]));
       return res.deletedCount > 0;
     }
 
@@ -845,7 +850,7 @@ export const store = {
     const isMongo = await connectMongo();
     if (isMongo) {
       await UserModel.updateOne(
-        { $or: [{ _id: id }, { id: id }] },
+        makeSafeQuery(id, ["username"]),
         { $set: { lastLoginAt: now } }
       );
       return;

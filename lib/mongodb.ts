@@ -22,8 +22,9 @@ if (!cached) {
 }
 
 export async function connectMongo(): Promise<typeof mongoose | null> {
-  if (!MONGODB_URI) {
-    // No MongoDB URI configured, gracefully fall back to local store
+  const uri = process.env.MONGODB_URI;
+  if (!uri || uri.includes("<username>")) {
+    // No valid MongoDB URI configured, gracefully fall back to local store
     return null;
   }
 
@@ -34,9 +35,11 @@ export async function connectMongo(): Promise<typeof mongoose | null> {
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
+      dbName: "knitflow",
     };
 
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongooseInstance) => {
+    cached.promise = mongoose.connect(uri, opts).then((mongooseInstance) => {
+      console.log(`[MongoDB] Connected successfully to database: ${mongooseInstance.connection.name}`);
       return mongooseInstance;
     });
   }
