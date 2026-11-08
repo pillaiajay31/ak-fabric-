@@ -89,14 +89,14 @@ function LoginForm() {
       <div className="text-center">
         {/* Yarn Spool Logo Icon */}
         <div className="flex justify-center mb-4">
-          <div className="relative h-20 w-20 rounded-xl overflow-hidden shadow-md bg-[#232228] p-1 border border-[#343340]">
+          <div className="relative h-20 w-20 rounded-2xl overflow-hidden shadow-lg bg-[#1e1d25] p-1 border border-[#343340] group hover:border-[#4b495c] transition-colors">
             <Image
-              src="/images/ak-spool-logo.jpg"
-              alt="AK Fabric Spool Logo"
+              src="/images/ak-fabric-logo-v3.jpg"
+              alt="AK Fabric Logo"
               width={80}
               height={80}
               priority
-              className="w-full h-full object-contain"
+              className="w-full h-full object-cover rounded-xl"
             />
           </div>
         </div>
@@ -317,10 +317,10 @@ export default function LoginPage() {
         </Suspense>
       </div>
 
-      {/* Right Column: High-tech Isometric Factory Scene matching reference */}
+      {/* Right Column: High-tech Isometric Factory Scene */}
       <div className="hidden lg:flex flex-1 relative bg-[#2a3848] overflow-hidden min-h-screen items-center justify-center">
         <Image
-          src="/images/factory-isometric.jpg"
+          src="/images/factory-artwork.jpg"
           alt="A.K. Fabric Textile Production Mill Isometric"
           fill
           priority
