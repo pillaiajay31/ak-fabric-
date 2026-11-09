@@ -14,6 +14,7 @@ import {
   Check,
   FileText,
   FileSpreadsheet,
+  X,
 } from "lucide-react";
 import { Customer, ProductionRoll, Machine, DeliveryChallan, TaxInvoice } from "@/lib/types";
 import { formatIndianCurrency, formatDateIndian } from "@/lib/utils";
@@ -704,21 +705,39 @@ export default function NewDispatchPage() {
 
       {/* Created Success & WhatsApp Share Modal */}
       {createdDispatch && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-in fade-in duration-150">
-          <div className="w-full max-w-lg rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 shadow-2xl space-y-5 animate-in zoom-in-95 duration-150">
+        <div
+          onClick={() => setCreatedDispatch(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-in fade-in duration-150"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="w-full max-w-lg rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 shadow-2xl space-y-5 animate-in zoom-in-95 duration-150 relative"
+          >
             {/* Header */}
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-900/60 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
-                <Check className="h-5 w-5 stroke-[2.5]" />
+            <div className="flex items-start justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-900/60 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0">
+                  <Check className="h-5 w-5 stroke-[2.5]" />
+                </div>
+                <div>
+                  <h2 className="text-base font-bold text-neutral-950 dark:text-white">
+                    Dispatch Created Successfully
+                  </h2>
+                  <p className="text-xs text-neutral-500">
+                    Challan #{createdDispatch.challan.challanNo} & Tax Invoice generated
+                  </p>
+                </div>
               </div>
-              <div>
-                <h2 className="text-base font-bold text-neutral-950 dark:text-white">
-                  Dispatch Created Successfully
-                </h2>
-                <p className="text-xs text-neutral-500">
-                  Challan #{createdDispatch.challan.challanNo} & Tax Invoice generated
-                </p>
-              </div>
+
+              <button
+                type="button"
+                onClick={() => setCreatedDispatch(null)}
+                aria-label="Close"
+                title="Close"
+                className="p-1.5 rounded-lg text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+              >
+                <X className="h-5 w-5" />
+              </button>
             </div>
 
             {/* Summary Details Box */}
@@ -794,12 +813,21 @@ export default function NewDispatchPage() {
 
             {/* Document Links */}
             <div className="flex items-center justify-between pt-3 border-t border-neutral-200 dark:border-neutral-800 gap-2">
-              <Link
-                href="/dispatch"
-                className="px-3 py-2 rounded-lg text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white transition-colors"
-              >
-                All Dispatches
-              </Link>
+              <div className="flex items-center gap-1">
+                <button
+                  type="button"
+                  onClick={() => setCreatedDispatch(null)}
+                  className="px-3 py-2 rounded-lg text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+                >
+                  Close
+                </button>
+                <Link
+                  href="/dispatch"
+                  className="px-3 py-2 rounded-lg text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+                >
+                  All Dispatches
+                </Link>
+              </div>
 
               <div className="flex items-center gap-2">
                 <Link
