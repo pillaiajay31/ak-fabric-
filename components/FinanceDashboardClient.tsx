@@ -178,6 +178,15 @@ export function FinanceDashboardClient() {
     }
   };
 
+  const shareInvoiceOnWhatsApp = (inv: TaxInvoice) => {
+    const origin = typeof window !== "undefined" ? window.location.origin : "https://ak-fabric.vercel.app";
+    const invoiceUrl = `${origin}/dispatch/invoice/${inv.invoiceNo}`;
+    const challanUrl = inv.challanNo ? `\n*Challan Ref:* #${inv.challanNo}` : "";
+    const totalGst = Number(inv.cgstAmount || 0) + Number(inv.utgstAmount || 0) + Number(inv.igstAmount || 0);
+    const msg = `*A.K. FABRIC (SILVASSA)*\n*TAX INVOICE #${inv.invoiceNo}*\n-----------------------------------\n*Customer:* ${inv.customerName}\n*GSTIN:* ${inv.customerGstin}\n*Date:* ${formatDateIndian(inv.invoiceDate)}${challanUrl}\n*Quantity:* ${inv.quantityKg} KG (${inv.noOfRolls} Rolls)\n*Rate:* Rs. ${Number(inv.ratePerKg).toFixed(2)}/KG\n*Taxable Value:* Rs. ${formatIndianCurrency(inv.taxableAmount)}\n*Total GST:* Rs. ${formatIndianCurrency(totalGst)}\n*Grand Total:* Rs. ${formatIndianCurrency(inv.grandTotal)}\n-----------------------------------\nView & Print Tax Invoice PDF:\n${invoiceUrl}`;
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, "_blank");
+  };
+
   const handleStartDateChange = (newStart: string) => {
     if (!newStart) return;
     setStartDate(newStart);
@@ -842,6 +851,17 @@ export function FinanceDashboardClient() {
                     </td>
                     <td className="py-3 px-4 text-center">
                       <div className="flex items-center justify-center gap-1.5">
+                        <button
+                          type="button"
+                          onClick={() => shareInvoiceOnWhatsApp(inv)}
+                          title="Share Tax Invoice on WhatsApp"
+                          className="inline-flex items-center justify-center p-1.5 rounded-md bg-[#25D366]/10 hover:bg-[#25D366] text-[#25D366] hover:text-white transition-colors"
+                        >
+                          <svg className="h-3.5 w-3.5 fill-current shrink-0" viewBox="0 0 24 24">
+                            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.153.57 4.17 1.564 5.91l-1.664 6.074 6.244-1.637c1.7 1.01 3.684 1.653 5.856 1.653 6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z" />
+                          </svg>
+                        </button>
+
                         <Link
                           href={`/dispatch/invoice/${inv.invoiceNo}`}
                           className="px-2.5 py-1 rounded bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 text-[11px] font-semibold hover:opacity-90 transition-opacity"
@@ -936,28 +956,39 @@ export function FinanceDashboardClient() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-2 pt-1">
+                <div className="grid grid-cols-3 gap-1.5 pt-1">
                   <Link
                     href={`/dispatch/invoice/${inv.invoiceNo}`}
-                    className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 text-xs font-semibold shadow-sm"
+                    className="flex items-center justify-center gap-1 py-2 px-2 rounded-lg bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 text-xs font-semibold shadow-sm"
                   >
                     <FileText className="h-3.5 w-3.5" />
-                    <span>Print Invoice</span>
+                    <span>Invoice</span>
                   </Link>
 
                   {inv.challanNo ? (
                     <Link
                       href={`/dispatch/challan/${inv.challanNo}`}
-                      className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-xs font-semibold text-neutral-800 dark:text-neutral-200 shadow-sm"
+                      className="flex items-center justify-center gap-1 py-2 px-2 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-xs font-semibold text-neutral-800 dark:text-neutral-200 shadow-sm"
                     >
                       <FileSpreadsheet className="h-3.5 w-3.5" />
-                      <span>Challan #{inv.challanNo}</span>
+                      <span>Challan</span>
                     </Link>
                   ) : (
                     <div className="flex items-center justify-center py-2 text-neutral-400 text-xs">
                       No Challan
                     </div>
                   )}
+
+                  <button
+                    type="button"
+                    onClick={() => shareInvoiceOnWhatsApp(inv)}
+                    className="flex items-center justify-center gap-1 py-2 px-2 rounded-lg bg-[#25D366] hover:bg-[#20ba5a] text-white text-xs font-semibold shadow-sm"
+                  >
+                    <svg className="h-3.5 w-3.5 fill-current shrink-0" viewBox="0 0 24 24">
+                      <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.153.57 4.17 1.564 5.91l-1.664 6.074 6.244-1.637c1.7 1.01 3.684 1.653 5.856 1.653 6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z" />
+                    </svg>
+                    <span>Share</span>
+                  </button>
                 </div>
               </div>
             );
@@ -973,3 +1004,4 @@ export function FinanceDashboardClient() {
     </div>
   );
 }
+

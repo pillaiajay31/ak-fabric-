@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { DeliveryChallan, CompanyProfile } from "@/lib/types";
 import { formatIndianCurrency, formatDateIndian } from "@/lib/utils";
+import { WhatsAppShareButton } from "@/components/WhatsAppShareButton";
 
 const COPY_TYPES = [
   "Original for Recipient",
@@ -162,13 +163,22 @@ export default function DeliveryChallanViewPage({
             <span>Switch to Tax Invoice</span>
           </Link>
 
+          {/* Share on WhatsApp as PDF */}
+          <WhatsAppShareButton
+            elementId="printable-challan"
+            fileName={`Delivery-Challan-${challan.challanNo}-AK-Fabric`}
+            shareTitle={`Delivery Challan #${challan.challanNo} - A.K. Fabric`}
+            shareMessage={`*A.K. FABRIC (SILVASSA)*\n*DELIVERY CHALLAN #${challan.challanNo}*\n-----------------------------------\n*Customer:* ${challan.customerName}\n*Date:* ${formatDateIndian(challan.challanDate)}\n*Vehicle No:* ${challan.vehicleNo}\n*Transporter:* ${challan.transporter || "ROADWAYS"}\n*Total Rolls:* ${challan.totalRolls} Rolls (${challan.totalWeight.toFixed(2)} KG)\n*Quality:* ${challan.fabricQuality || "Grey Fabric"}\n-----------------------------------\nPlease find the official Delivery Challan attached as PDF.`}
+            label="Share Challan PDF"
+          />
+
           {/* Print Button */}
           <button
             onClick={handlePrint}
             className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 text-xs font-semibold hover:opacity-90 transition-opacity shadow-sm"
           >
             <Printer className="h-3.5 w-3.5" />
-            <span>Print Challan / PDF</span>
+            <span>Print Challan</span>
           </button>
         </div>
       </div>

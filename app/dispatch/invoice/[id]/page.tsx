@@ -15,6 +15,7 @@ import {
   formatDateIndian,
   numberToWordsIndian,
 } from "@/lib/utils";
+import { WhatsAppShareButton } from "@/components/WhatsAppShareButton";
 
 const COPY_TYPES = [
   "Original for Recipient",
@@ -138,13 +139,22 @@ export default function TaxInvoiceViewPage({
             <span>Switch to Delivery Challan</span>
           </Link>
 
+          {/* Share on WhatsApp as PDF */}
+          <WhatsAppShareButton
+            elementId="printable-invoice"
+            fileName={`Tax-Invoice-${invoice.invoiceNo}-AK-Fabric`}
+            shareTitle={`Tax Invoice #${invoice.invoiceNo} - A.K. Fabric`}
+            shareMessage={`*A.K. FABRIC (SILVASSA)*\n*TAX INVOICE #${invoice.invoiceNo}*\n-----------------------------------\n*Customer:* ${invoice.customerName}\n*GSTIN:* ${invoice.customerGstin}\n*Date:* ${formatDateIndian(invoice.invoiceDate)}\n*Challan Ref:* #${invoice.challanNo || invoice.invoiceNo}\n*Quantity:* ${invoice.quantityKg} KG (${invoice.noOfRolls} Rolls)\n*Rate:* Rs. ${invoice.ratePerKg.toFixed(2)}/KG\n*Taxable Value:* Rs. ${formatIndianCurrency(invoice.taxableAmount)}\n*Total GST:* Rs. ${formatIndianCurrency(invoice.cgstAmount + invoice.utgstAmount + invoice.igstAmount)}\n*Grand Total:* Rs. ${formatIndianCurrency(invoice.grandTotal)}\n-----------------------------------\nPlease find the official GST Tax Invoice attached as PDF.`}
+            label="Share Invoice PDF"
+          />
+
           {/* Print Button */}
           <button
             onClick={handlePrint}
             className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 text-xs font-semibold hover:opacity-90 transition-opacity shadow-sm"
           >
             <Printer className="h-3.5 w-3.5" />
-            <span>Print Invoice / PDF</span>
+            <span>Print Invoice</span>
           </button>
         </div>
       </div>
