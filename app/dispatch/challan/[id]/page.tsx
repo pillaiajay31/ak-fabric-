@@ -13,6 +13,7 @@ import {
 import { DeliveryChallan, CompanyProfile } from "@/lib/types";
 import { formatIndianCurrency, formatDateIndian } from "@/lib/utils";
 import { WhatsAppShareButton } from "@/components/WhatsAppShareButton";
+import { shareChallanPdf, downloadChallanPdf } from "@/lib/pdfGenerator";
 
 const COPY_TYPES = [
   "Original for Recipient",
@@ -168,8 +169,10 @@ export default function DeliveryChallanViewPage({
             elementId="printable-challan"
             fileName={`Delivery-Challan-${challan.challanNo}-AK-Fabric`}
             shareTitle={`Delivery Challan #${challan.challanNo} - A.K. Fabric`}
-            shareMessage={`*A.K. FABRIC (SILVASSA)*\n*DELIVERY CHALLAN #${challan.challanNo}*\n-----------------------------------\n*Customer:* ${challan.customerName}\n*Date:* ${formatDateIndian(challan.challanDate)}\n*Vehicle No:* ${challan.vehicleNo}\n*Transporter:* ${challan.transporter || "ROADWAYS"}\n*Total Rolls:* ${challan.totalRolls} Rolls (${challan.totalWeight.toFixed(2)} KG)\n*Quality:* ${challan.fabricQuality || "Grey Fabric"}\n-----------------------------------\nPlease find the official Delivery Challan attached as PDF.`}
+            shareMessage={`*A.K. FABRIC (SILVASSA)*\n*DELIVERY CHALLAN #${challan.challanNo}*`}
             label="Share Challan PDF"
+            onCustomShare={() => shareChallanPdf(challan, company)}
+            onCustomDownload={() => downloadChallanPdf(challan, company)}
           />
 
           {/* Print Button */}

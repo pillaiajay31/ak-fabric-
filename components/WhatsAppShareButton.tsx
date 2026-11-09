@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Loader2, Share2, Download, Check } from "lucide-react";
-import { sharePdfToWhatsApp, downloadPdfFromElement, SharePdfOptions } from "@/lib/sharePdf";
+import { Loader2, Download, Check } from "lucide-react";
+import { sharePdfToWhatsApp, downloadPdfFromElement } from "@/lib/sharePdf";
 
 interface WhatsAppShareButtonProps {
   elementId?: string;
@@ -13,6 +13,8 @@ interface WhatsAppShareButtonProps {
   label?: string;
   variant?: "primary" | "secondary" | "icon" | "outline";
   showDownloadOption?: boolean;
+  onCustomShare?: () => Promise<{ method: "share" | "download"; fileName?: string } | void>;
+  onCustomDownload?: () => void;
 }
 
 export function WhatsAppShareButton({
@@ -21,17 +23,28 @@ export function WhatsAppShareButton({
   fileName,
   shareTitle,
   shareMessage,
-  label = "Share on WhatsApp",
+  label = "Share PDF on WhatsApp",
   variant = "primary",
   showDownloadOption = true,
+  onCustomShare,
+  onCustomDownload,
 }: WhatsAppShareButtonProps) {
   const [sharing, setSharing] = useState(false);
   const [downloading, setDownloading] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [notice, setNotice] = useState<string | null>(null);
 
   const handleShare = async () => {
     try {
       setSharing(true);
+      setNotice(null);
+      if (onCustomShare) {
+        const res = await onCustomShare();
+        if (res && res.method === "download") {
+          setNotice(`PDF downloaded! You can attach ${res.fileName || "it"} directly to your WhatsApp chat.`);
+          setTimeout(() => setNotice(null), 6000);
+        }
+        return;
+      }
       await sharePdfToWhatsApp({
         elementId,
         fallbackUrl,
@@ -47,10 +60,15 @@ export function WhatsAppShareButton({
   };
 
   const handleDownload = async () => {
-    if (!elementId) return;
     try {
       setDownloading(true);
-      await downloadPdfFromElement(elementId, fileName);
+      if (onCustomDownload) {
+        onCustomDownload();
+        return;
+      }
+      if (elementId) {
+        await downloadPdfFromElement(elementId, fileName);
+      }
     } catch (e) {
       console.error(e);
     } finally {
@@ -59,7 +77,7 @@ export function WhatsAppShareButton({
   };
 
   return (
-    <div className="inline-flex items-center gap-1.5">
+    <div className="relative inline-flex items-center gap-1.5">
       {/* Primary WhatsApp Share Button */}
       <button
         type="button"
@@ -84,11 +102,11 @@ export function WhatsAppShareButton({
             <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.153.57 4.17 1.564 5.91l-1.664 6.074 6.244-1.637c1.7 1.01 3.684 1.653 5.856 1.653 6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z" />
           </svg>
         )}
-        <span>{sharing ? "Generating PDF..." : label}</span>
+        <span>{sharing ? "Sharing PDF..." : label}</span>
       </button>
 
       {/* Direct PDF Download Button */}
-      {showDownloadOption && elementId && (
+      {showDownloadOption && (
         <button
           type="button"
           onClick={handleDownload}
@@ -103,7 +121,13 @@ export function WhatsAppShareButton({
           )}
         </button>
       )}
+
+      {/* Temporary Notice Toast for Desktop users */}
+      {notice && (
+        <div className="absolute top-full left-0 mt-1.5 z-30 w-64 p-2 rounded-lg bg-neutral-950 text-white text-[11px] leading-tight shadow-xl animate-in fade-in slide-in-from-top-1">
+          {notice}
+        </div>
+      )}
     </div>
   );
 }
-

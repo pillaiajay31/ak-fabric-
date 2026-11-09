@@ -16,6 +16,7 @@ import {
   numberToWordsIndian,
 } from "@/lib/utils";
 import { WhatsAppShareButton } from "@/components/WhatsAppShareButton";
+import { shareInvoicePdf, downloadInvoicePdf } from "@/lib/pdfGenerator";
 
 const COPY_TYPES = [
   "Original for Recipient",
@@ -144,8 +145,10 @@ export default function TaxInvoiceViewPage({
             elementId="printable-invoice"
             fileName={`Tax-Invoice-${invoice.invoiceNo}-AK-Fabric`}
             shareTitle={`Tax Invoice #${invoice.invoiceNo} - A.K. Fabric`}
-            shareMessage={`*A.K. FABRIC (SILVASSA)*\n*TAX INVOICE #${invoice.invoiceNo}*\n-----------------------------------\n*Customer:* ${invoice.customerName}\n*GSTIN:* ${invoice.customerGstin}\n*Date:* ${formatDateIndian(invoice.invoiceDate)}\n*Challan Ref:* #${invoice.challanNo || invoice.invoiceNo}\n*Quantity:* ${invoice.quantityKg} KG (${invoice.noOfRolls} Rolls)\n*Rate:* Rs. ${invoice.ratePerKg.toFixed(2)}/KG\n*Taxable Value:* Rs. ${formatIndianCurrency(invoice.taxableAmount)}\n*CGST:* ${!invoice.isInterState && Number(invoice.cgstAmount || 0) > 0 ? `Rs. ${formatIndianCurrency(invoice.cgstAmount)}` : "-"}\n*UTGST:* ${!invoice.isInterState && Number(invoice.utgstAmount || 0) > 0 ? `Rs. ${formatIndianCurrency(invoice.utgstAmount)}` : "-"}\n*IGST:* ${invoice.isInterState && Number(invoice.igstAmount || 0) > 0 ? `Rs. ${formatIndianCurrency(invoice.igstAmount)}` : "-"}\n*Grand Total:* Rs. ${formatIndianCurrency(invoice.grandTotal)}\n-----------------------------------\nPlease find the official GST Tax Invoice attached as PDF.`}
+            shareMessage={`*A.K. FABRIC (SILVASSA)*\n*TAX INVOICE #${invoice.invoiceNo}*`}
             label="Share Invoice PDF"
+            onCustomShare={() => shareInvoicePdf(invoice, null, company)}
+            onCustomDownload={() => downloadInvoicePdf(invoice, company)}
           />
 
           {/* Print Button */}

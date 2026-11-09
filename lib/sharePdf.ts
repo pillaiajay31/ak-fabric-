@@ -128,10 +128,8 @@ export async function sharePdfToWhatsApp(options: SharePdfOptions): Promise<bool
       await downloadPdfFromElement(elementId, fileName);
     }
 
-    // Open WhatsApp with pre-filled message & document URL
-    const messageWithLink = fallbackUrl
-      ? `${shareMessage}\n\n*View Online Document:* ${fallbackUrl}`
-      : shareMessage;
+    // Open WhatsApp with pre-filled message
+    const messageWithLink = `${shareMessage}\n\n*Please find the attached official PDF document.*`;
 
     const encoded = encodeURIComponent(messageWithLink);
     const whatsappUrl = `https://api.whatsapp.com/send?text=${encoded}`;
