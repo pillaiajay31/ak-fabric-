@@ -43,9 +43,9 @@ export default function NewDispatchPage() {
   const [placeOfSupply, setPlaceOfSupply] = useState<string>("BHIWANDI");
   const [lrNo, setLrNo] = useState<string>("");
   const [transporter, setTransporter] = useState<string>("SHIV TRANSPORT");
-  const [noOfBags, setNoOfBags] = useState<number>(1);
+  const [noOfBags, setNoOfBags] = useState<number | string>(1);
   const [userEditedBags, setUserEditedBags] = useState<boolean>(false);
-  const [ratePerKg, setRatePerKg] = useState<number>(42);
+  const [ratePerKg, setRatePerKg] = useState<number | string>(42);
   const [fabricQuality, setFabricQuality] = useState<string>(
     "NYLON 44/10 KNITTED GREY FABRIC"
   );
@@ -188,8 +188,11 @@ export default function NewDispatchPage() {
     return `TOTAL ${parts.join(" + ")} = ${totalSelectedWeight.toFixed(2)} KG`;
   }, [machineBreakdown, totalSelectedWeight, totalSelectedRolls]);
 
+  const effectiveRate = typeof ratePerKg === "number" ? ratePerKg : (parseFloat(ratePerKg) || 0);
+  const displayBags = Number(noOfBags) > 0 ? Number(noOfBags) : Math.max(1, Math.ceil(totalSelectedRolls / 2));
+
   // Financial calculations
-  const taxableAmount = Number((totalSelectedWeight * ratePerKg).toFixed(2));
+  const taxableAmount = Number((totalSelectedWeight * effectiveRate).toFixed(2));
   const selectedCustomer = customers.find((c) => c.id === customerId);
   const isInterState =
     selectedCustomer?.stateCode !== "26"; // 26 = Dadra & Nagar Haveli
@@ -238,8 +241,8 @@ export default function NewDispatchPage() {
         placeOfSupply: placeOfSupply.trim().toUpperCase(),
         lrNo: lrNo.trim(),
         transporter: transporter.trim().toUpperCase(),
-        noOfBags: Number(noOfBags),
-        ratePerKg: Number(ratePerKg),
+        noOfBags: Math.max(1, Number(noOfBags) || Math.ceil(totalSelectedRolls / 2) || 1),
+        ratePerKg: effectiveRate,
         fabricQuality,
         shippingAddress,
         rolls: selectedRollsList.map((r) => ({
@@ -399,20 +402,39 @@ export default function NewDispatchPage() {
                 <label className="block text-xs font-medium text-neutral-600 dark:text-neutral-400">
                   Number of Bags
                 </label>
-                {!userEditedBags && totalSelectedRolls > 0 && (
+                {!userEditedBags && totalSelectedRolls > 0 ? (
                   <span className="text-[10px] text-neutral-400 font-normal">
                     Auto: ~2 rolls/bag
                   </span>
-                )}
+                ) : userEditedBags ? (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setUserEditedBags(false);
+                      setNoOfBags(Math.max(1, Math.ceil(totalSelectedRolls / 2)));
+                    }}
+                    className="text-[10px] text-blue-600 dark:text-blue-400 hover:underline"
+                  >
+                    Reset to auto
+                  </button>
+                ) : null}
               </div>
               <input
                 type="number"
                 inputMode="numeric"
                 min="1"
+                placeholder={String(Math.max(1, Math.ceil(totalSelectedRolls / 2)))}
                 value={noOfBags}
                 onChange={(e) => {
                   setUserEditedBags(true);
-                  setNoOfBags(parseInt(e.target.value, 10) || 1);
+                  setNoOfBags(e.target.value);
+                }}
+                onBlur={() => {
+                  if (noOfBags === "" || Number(noOfBags) < 1) {
+                    setNoOfBags(Math.max(1, Math.ceil(totalSelectedRolls / 2)));
+                  } else {
+                    setNoOfBags(Math.floor(Number(noOfBags)));
+                  }
                 }}
                 className="w-full px-3 py-2.5 sm:py-2 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-950 text-neutral-900 dark:text-white text-base sm:text-xs font-semibold"
               />
@@ -428,8 +450,18 @@ export default function NewDispatchPage() {
                   inputMode="decimal"
                   step="any"
                   min="0"
+                  placeholder="0.00"
                   value={ratePerKg}
-                  onChange={(e) => setRatePerKg(parseFloat(e.target.value) || 0)}
+                  onChange={(e) => {
+                    setRatePerKg(e.target.value);
+                  }}
+                  onBlur={() => {
+                    if (ratePerKg === "" || isNaN(Number(ratePerKg)) || Number(ratePerKg) < 0) {
+                      setRatePerKg(0);
+                    } else {
+                      setRatePerKg(Number(ratePerKg));
+                    }
+                  }}
                   className="w-full px-3 py-2.5 sm:py-2 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-950 text-neutral-900 dark:text-white text-base sm:text-xs font-bold"
                 />
                 <span className="absolute right-3 top-3 sm:top-2 text-xs text-neutral-500 font-semibold">
@@ -643,7 +675,7 @@ export default function NewDispatchPage() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-neutral-200 dark:border-neutral-800 text-xs">
               <div>
                 <span className="text-neutral-500 block text-[10px]">
-                  Taxable Value (@ Rs. {ratePerKg}/KG)
+                  Taxable Value (@ Rs. {effectiveRate}/KG)
                 </span>
                 <span className="font-bold text-neutral-900 dark:text-white">
                   Rs. {formatIndianCurrency(taxableAmount)}
@@ -664,7 +696,7 @@ export default function NewDispatchPage() {
                   Rolls & Packaging Bags
                 </span>
                 <span className="font-bold text-neutral-900 dark:text-white">
-                  {totalSelectedRolls} {totalSelectedRolls === 1 ? "Roll" : "Rolls"} · {noOfBags} {noOfBags === 1 ? "Bag" : "Bags"}
+                  {totalSelectedRolls} {totalSelectedRolls === 1 ? "Roll" : "Rolls"} · {displayBags} {displayBags === 1 ? "Bag" : "Bags"}
                 </span>
               </div>
 
@@ -697,7 +729,7 @@ export default function NewDispatchPage() {
             {submitting
               ? "Generating Documents..."
               : totalSelectedRolls > 0
-              ? `Create Challan & Invoice #${challanNo} (${totalSelectedRolls} Rolls · ${noOfBags} Bags)`
+              ? `Create Challan & Invoice #${challanNo} (${totalSelectedRolls} Rolls · ${displayBags} Bags)`
               : `Create Challan & Tax Invoice #${challanNo}`}
           </button>
         </div>

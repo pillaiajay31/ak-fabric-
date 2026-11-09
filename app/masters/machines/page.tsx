@@ -28,7 +28,7 @@ export default function MachineMasterPage() {
   const [name, setName] = useState("");
   const [model, setModel] = useState("");
   const [rollPrefix, setRollPrefix] = useState("");
-  const [dailyTargetKg, setDailyTargetKg] = useState<number>(450);
+  const [dailyTargetKg, setDailyTargetKg] = useState<number | string>(450);
   const [status, setStatus] = useState<"active" | "maintenance" | "idle">("active");
   const [notes, setNotes] = useState("");
 
@@ -281,7 +281,14 @@ export default function MachineMasterPage() {
                 <input
                   type="number"
                   value={dailyTargetKg}
-                  onChange={(e) => setDailyTargetKg(parseInt(e.target.value, 10) || 0)}
+                  onChange={(e) => setDailyTargetKg(e.target.value)}
+                  onBlur={() => {
+                    if (dailyTargetKg === "" || Number(dailyTargetKg) < 0) {
+                      setDailyTargetKg(0);
+                    } else {
+                      setDailyTargetKg(Number(dailyTargetKg));
+                    }
+                  }}
                   className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-950 text-neutral-900 dark:text-white text-xs font-semibold"
                 />
               </div>

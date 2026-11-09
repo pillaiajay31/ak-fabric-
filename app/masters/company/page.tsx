@@ -36,11 +36,15 @@ export default function CompanyMasterPage() {
     try {
       setSaving(true);
       setMessage(null);
-      const res = await fetch("/api/company", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(profile),
-      });
+        const payload = {
+          ...profile,
+          defaultRate: parseFloat(String(profile.defaultRate)) || 0,
+        };
+        const res = await fetch("/api/company", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
       const json = await res.json();
       if (json.success) {
         setProfile(json.data);
@@ -287,8 +291,10 @@ export default function CompanyMasterPage() {
             </label>
             <input
               type="number"
-              value={profile.defaultRate}
-              onChange={(e) => setProfile({ ...profile, defaultRate: parseFloat(e.target.value) || 0 })}
+              step="any"
+              value={profile.defaultRate ?? ""}
+              onChange={(e) => setProfile({ ...profile, defaultRate: e.target.value as any })}
+              onBlur={() => setProfile({ ...profile, defaultRate: parseFloat(String(profile.defaultRate)) || 0 })}
               className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-950 text-neutral-900 dark:text-white text-xs font-bold"
             />
           </div>

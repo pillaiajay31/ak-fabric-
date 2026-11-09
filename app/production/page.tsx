@@ -39,7 +39,7 @@ export default function ProductionPage() {
 
   // Batch Mode State
   const [batchMachine, setBatchMachine] = useState<string>("A");
-  const [batchStartNumber, setBatchStartNumber] = useState<number>(1001);
+  const [batchStartNumber, setBatchStartNumber] = useState<number | string>(1001);
   const [batchDate, setBatchDate] = useState<string>("");
   const [batchShift] = useState<"Day" | "Night">("Day");
   const [batchRows, setBatchRows] = useState<Array<{ id: number; weight: string }>>([
@@ -185,8 +185,9 @@ export default function ProductionPage() {
       return;
     }
 
+    const startNum = Number(batchStartNumber) || 1001;
     const payload = validRows.map((r, index) => ({
-      rollNo: `${batchMachine}.${batchStartNumber + index}`,
+      rollNo: `${batchMachine}.${startNum + index}`,
       machineCode: batchMachine,
       netWeight: Number(r.weight),
       fabricQuality: "Nylon 44/10 knitted grey fabric",
@@ -219,7 +220,7 @@ export default function ProductionPage() {
           { id: 4, weight: "" },
           { id: 5, weight: "" },
         ]);
-        setBatchStartNumber(batchStartNumber + payload.length);
+        setBatchStartNumber(startNum + payload.length);
       } else {
         setMessage({ type: "error", text: json.error || "Batch submission failed" });
       }
@@ -537,7 +538,14 @@ export default function ProductionPage() {
                 <input
                   type="number"
                   value={batchStartNumber}
-                  onChange={(e) => setBatchStartNumber(parseInt(e.target.value, 10) || 1)}
+                  onChange={(e) => setBatchStartNumber(e.target.value)}
+                  onBlur={() => {
+                    if (batchStartNumber === "" || Number(batchStartNumber) < 1) {
+                      setBatchStartNumber(1001);
+                    } else {
+                      setBatchStartNumber(Math.floor(Number(batchStartNumber)));
+                    }
+                  }}
                   className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-950 text-neutral-900 dark:text-white text-xs font-semibold"
                 />
               </div>
@@ -564,7 +572,7 @@ export default function ProductionPage() {
                     className="p-2.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-950 flex flex-col gap-1"
                   >
                     <span className="text-[11px] font-semibold text-neutral-600 dark:text-neutral-400">
-                      {batchMachine}.{batchStartNumber + idx}
+                      {batchMachine}.{(Number(batchStartNumber) || 1001) + idx}
                     </span>
                     <input
                       type="number"
