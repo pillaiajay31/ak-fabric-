@@ -146,3 +146,4 @@ export async function sharePdfToWhatsApp(options: SharePdfOptions): Promise<bool
     return false;
   }
 }
+

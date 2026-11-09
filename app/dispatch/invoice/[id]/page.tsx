@@ -144,7 +144,7 @@ export default function TaxInvoiceViewPage({
             elementId="printable-invoice"
             fileName={`Tax-Invoice-${invoice.invoiceNo}-AK-Fabric`}
             shareTitle={`Tax Invoice #${invoice.invoiceNo} - A.K. Fabric`}
-            shareMessage={`*A.K. FABRIC (SILVASSA)*\n*TAX INVOICE #${invoice.invoiceNo}*\n-----------------------------------\n*Customer:* ${invoice.customerName}\n*GSTIN:* ${invoice.customerGstin}\n*Date:* ${formatDateIndian(invoice.invoiceDate)}\n*Challan Ref:* #${invoice.challanNo || invoice.invoiceNo}\n*Quantity:* ${invoice.quantityKg} KG (${invoice.noOfRolls} Rolls)\n*Rate:* Rs. ${invoice.ratePerKg.toFixed(2)}/KG\n*Taxable Value:* Rs. ${formatIndianCurrency(invoice.taxableAmount)}\n*Total GST:* Rs. ${formatIndianCurrency(invoice.cgstAmount + invoice.utgstAmount + invoice.igstAmount)}\n*Grand Total:* Rs. ${formatIndianCurrency(invoice.grandTotal)}\n-----------------------------------\nPlease find the official GST Tax Invoice attached as PDF.`}
+            shareMessage={`*A.K. FABRIC (SILVASSA)*\n*TAX INVOICE #${invoice.invoiceNo}*\n-----------------------------------\n*Customer:* ${invoice.customerName}\n*GSTIN:* ${invoice.customerGstin}\n*Date:* ${formatDateIndian(invoice.invoiceDate)}\n*Challan Ref:* #${invoice.challanNo || invoice.invoiceNo}\n*Quantity:* ${invoice.quantityKg} KG (${invoice.noOfRolls} Rolls)\n*Rate:* Rs. ${invoice.ratePerKg.toFixed(2)}/KG\n*Taxable Value:* Rs. ${formatIndianCurrency(invoice.taxableAmount)}\n*CGST:* ${!invoice.isInterState && Number(invoice.cgstAmount || 0) > 0 ? `Rs. ${formatIndianCurrency(invoice.cgstAmount)}` : "-"}\n*UTGST:* ${!invoice.isInterState && Number(invoice.utgstAmount || 0) > 0 ? `Rs. ${formatIndianCurrency(invoice.utgstAmount)}` : "-"}\n*IGST:* ${invoice.isInterState && Number(invoice.igstAmount || 0) > 0 ? `Rs. ${formatIndianCurrency(invoice.igstAmount)}` : "-"}\n*Grand Total:* Rs. ${formatIndianCurrency(invoice.grandTotal)}\n-----------------------------------\nPlease find the official GST Tax Invoice attached as PDF.`}
             label="Share Invoice PDF"
           />
 
@@ -298,8 +298,8 @@ export default function TaxInvoiceViewPage({
                 </td>
               </tr>
 
-              {/* Extra spacing rows to give full height like paper invoice */}
-              <tr className="h-32">
+              {/* Spacing row to balance single page layout */}
+              <tr className="h-20">
                 <td className="border-r border-black"></td>
                 <td className="border-r border-black"></td>
                 <td className="border-r border-black"></td>
@@ -307,6 +307,48 @@ export default function TaxInvoiceViewPage({
                 <td className="border-r border-black"></td>
                 <td className="border-r border-black"></td>
                 <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        {/* GST Tax Summary Table */}
+        <div className="border-b border-black">
+          <table className="w-full text-[9px] font-mono border-collapse text-center">
+            <thead>
+              <tr className="bg-neutral-100 font-bold border-b border-black">
+                <th className="py-1 px-1 border-r border-black w-20">HSN/SAC</th>
+                <th className="py-1 px-1 border-r border-black">Taxable Value</th>
+                <th className="py-1 px-1 border-r border-black" colSpan={2}>CGST</th>
+                <th className="py-1 px-1 border-r border-black" colSpan={2}>UTGST</th>
+                <th className="py-1 px-1 border-r border-black" colSpan={2}>IGST</th>
+                <th className="py-1 px-1">Total Tax Amount</th>
+              </tr>
+              <tr className="bg-neutral-50 border-b border-black text-[8px] text-neutral-600 font-semibold">
+                <th className="border-r border-black"></th>
+                <th className="border-r border-black"></th>
+                <th className="py-0.5 border-r border-black w-10">Rate</th>
+                <th className="py-0.5 border-r border-black w-16">Amount</th>
+                <th className="py-0.5 border-r border-black w-10">Rate</th>
+                <th className="py-0.5 border-r border-black w-16">Amount</th>
+                <th className="py-0.5 border-r border-black w-10">Rate</th>
+                <th className="py-0.5 border-r border-black w-16">Amount</th>
+                <th className="py-0.5 w-20">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="py-1 border-r border-black font-semibold">{invoice.hsnSac}</td>
+                <td className="py-1 border-r border-black text-right pr-2 font-medium">{formatIndianCurrency(invoice.taxableAmount)}</td>
+                <td className="py-1 border-r border-black">{!invoice.isInterState && Number(invoice.cgstAmount || 0) > 0 ? `${invoice.cgstRate}%` : "-"}</td>
+                <td className="py-1 border-r border-black text-right pr-1">{!invoice.isInterState && Number(invoice.cgstAmount || 0) > 0 ? formatIndianCurrency(invoice.cgstAmount) : "-"}</td>
+                <td className="py-1 border-r border-black">{!invoice.isInterState && Number(invoice.utgstAmount || 0) > 0 ? `${invoice.utgstRate}%` : "-"}</td>
+                <td className="py-1 border-r border-black text-right pr-1">{!invoice.isInterState && Number(invoice.utgstAmount || 0) > 0 ? formatIndianCurrency(invoice.utgstAmount) : "-"}</td>
+                <td className="py-1 border-r border-black">{invoice.isInterState && Number(invoice.igstAmount || 0) > 0 ? `${invoice.igstRate}%` : "-"}</td>
+                <td className="py-1 border-r border-black text-right pr-1">{invoice.isInterState && Number(invoice.igstAmount || 0) > 0 ? formatIndianCurrency(invoice.igstAmount) : "-"}</td>
+                <td className="py-1 font-bold text-right pr-2">
+                  {formatIndianCurrency(Number(invoice.cgstAmount || 0) + Number(invoice.utgstAmount || 0) + Number(invoice.igstAmount || 0))}
+                </td>
               </tr>
             </tbody>
           </table>
@@ -341,39 +383,51 @@ export default function TaxInvoiceViewPage({
           {/* Right: Taxes and Grand Total (5 Cols) */}
           <div className="col-span-5 divide-y divide-neutral-300 text-[10px] font-mono">
             <div className="p-1.5 flex justify-between">
-              <span className="font-medium text-neutral-700">TOTAL</span>
+              <span className="font-medium text-neutral-700">TOTAL TAXABLE</span>
               <span className="font-bold">{formatIndianCurrency(invoice.taxableAmount)}</span>
             </div>
 
-            {invoice.isInterState ? (
-              <div className="p-1.5 flex justify-between">
-                <span className="font-medium text-neutral-700">
-                  IGST @ {invoice.igstRate}%
-                </span>
-                <span className="font-bold">
-                  {formatIndianCurrency(invoice.igstAmount)}
-                </span>
-              </div>
-            ) : (
-              <>
-                <div className="p-1.5 flex justify-between">
-                  <span className="font-medium text-neutral-700">
-                    CGST @ {invoice.cgstRate}%
-                  </span>
-                  <span className="font-bold">
-                    {formatIndianCurrency(invoice.cgstAmount)}
-                  </span>
-                </div>
-                <div className="p-1.5 flex justify-between">
-                  <span className="font-medium text-neutral-700">
-                    UT GST @ {invoice.utgstRate}%
-                  </span>
-                  <span className="font-bold">
-                    {formatIndianCurrency(invoice.utgstAmount)}
-                  </span>
-                </div>
-              </>
-            )}
+            {/* CGST */}
+            <div className="p-1.5 flex justify-between">
+              <span className="font-medium text-neutral-700">
+                {!invoice.isInterState && Number(invoice.cgstAmount || 0) > 0
+                  ? `CGST @ ${invoice.cgstRate}%`
+                  : "CGST"}
+              </span>
+              <span className="font-bold">
+                {!invoice.isInterState && Number(invoice.cgstAmount || 0) > 0
+                  ? formatIndianCurrency(invoice.cgstAmount)
+                  : "-"}
+              </span>
+            </div>
+
+            {/* UTGST */}
+            <div className="p-1.5 flex justify-between">
+              <span className="font-medium text-neutral-700">
+                {!invoice.isInterState && Number(invoice.utgstAmount || 0) > 0
+                  ? `UTGST @ ${invoice.utgstRate}%`
+                  : "UTGST"}
+              </span>
+              <span className="font-bold">
+                {!invoice.isInterState && Number(invoice.utgstAmount || 0) > 0
+                  ? formatIndianCurrency(invoice.utgstAmount)
+                  : "-"}
+              </span>
+            </div>
+
+            {/* IGST */}
+            <div className="p-1.5 flex justify-between">
+              <span className="font-medium text-neutral-700">
+                {invoice.isInterState && Number(invoice.igstAmount || 0) > 0
+                  ? `IGST @ ${invoice.igstRate}%`
+                  : "IGST"}
+              </span>
+              <span className="font-bold">
+                {invoice.isInterState && Number(invoice.igstAmount || 0) > 0
+                  ? formatIndianCurrency(invoice.igstAmount)
+                  : "-"}
+              </span>
+            </div>
 
             <div className="p-1.5 flex justify-between">
               <span className="font-medium text-neutral-700">Round OFF</span>
