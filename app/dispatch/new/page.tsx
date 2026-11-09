@@ -42,7 +42,8 @@ export default function NewDispatchPage() {
   const [placeOfSupply, setPlaceOfSupply] = useState<string>("BHIWANDI");
   const [lrNo, setLrNo] = useState<string>("");
   const [transporter, setTransporter] = useState<string>("SHIV TRANSPORT");
-  const [noOfBags, setNoOfBags] = useState<number>(49);
+  const [noOfBags, setNoOfBags] = useState<number>(1);
+  const [userEditedBags, setUserEditedBags] = useState<boolean>(false);
   const [ratePerKg, setRatePerKg] = useState<number>(42);
   const [fabricQuality, setFabricQuality] = useState<string>(
     "NYLON 44/10 KNITTED GREY FABRIC"
@@ -147,6 +148,18 @@ export default function NewDispatchPage() {
   }, [rolls, selectedRollIds]);
 
   const totalSelectedRolls = selectedRollsList.length;
+
+  // Automatically calculate number of bags from selected rolls (approx 2 rolls per gunny bag)
+  useEffect(() => {
+    if (!userEditedBags) {
+      if (totalSelectedRolls === 0) {
+        setNoOfBags(1);
+      } else {
+        setNoOfBags(Math.max(1, Math.ceil(totalSelectedRolls / 2)));
+      }
+    }
+  }, [totalSelectedRolls, userEditedBags]);
+
   const totalSelectedWeight = useMemo(() => {
     return Number(
       selectedRollsList.reduce((sum, r) => sum + r.netWeight, 0).toFixed(2)
@@ -381,15 +394,25 @@ export default function NewDispatchPage() {
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-neutral-600 dark:text-neutral-400 mb-1">
-                Number of Bags
-              </label>
+              <div className="flex items-center justify-between mb-1">
+                <label className="block text-xs font-medium text-neutral-600 dark:text-neutral-400">
+                  Number of Bags
+                </label>
+                {!userEditedBags && totalSelectedRolls > 0 && (
+                  <span className="text-[10px] text-neutral-400 font-normal">
+                    Auto: ~2 rolls/bag
+                  </span>
+                )}
+              </div>
               <input
                 type="number"
                 inputMode="numeric"
                 min="1"
                 value={noOfBags}
-                onChange={(e) => setNoOfBags(parseInt(e.target.value, 10) || 1)}
+                onChange={(e) => {
+                  setUserEditedBags(true);
+                  setNoOfBags(parseInt(e.target.value, 10) || 1);
+                }}
                 className="w-full px-3 py-2.5 sm:py-2 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-950 text-neutral-900 dark:text-white text-base sm:text-xs font-semibold"
               />
             </div>
@@ -637,10 +660,10 @@ export default function NewDispatchPage() {
 
               <div>
                 <span className="text-neutral-500 block text-[10px]">
-                  Estimated Bags
+                  Rolls & Packaging Bags
                 </span>
                 <span className="font-bold text-neutral-900 dark:text-white">
-                  {noOfBags} Bags
+                  {totalSelectedRolls} {totalSelectedRolls === 1 ? "Roll" : "Rolls"} · {noOfBags} {noOfBags === 1 ? "Bag" : "Bags"}
                 </span>
               </div>
 
@@ -672,6 +695,8 @@ export default function NewDispatchPage() {
           >
             {submitting
               ? "Generating Documents..."
+              : totalSelectedRolls > 0
+              ? `Create Challan & Invoice #${challanNo} (${totalSelectedRolls} Rolls · ${noOfBags} Bags)`
               : `Create Challan & Tax Invoice #${challanNo}`}
           </button>
         </div>
