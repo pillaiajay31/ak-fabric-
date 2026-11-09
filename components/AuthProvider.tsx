@@ -80,6 +80,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (path.startsWith("/rejection")) return p.productionRejection;
       if (path === "/dispatch/new") return p.financeCreate;
       if (path.startsWith("/dispatch")) return p.financeView;
+      if (path.startsWith("/finance")) return p.financeView;
       if (path.startsWith("/masters/machines")) return p.masterMachines;
       if (path.startsWith("/masters/customers")) return p.masterCustomers;
       if (path.startsWith("/masters/company")) return p.masterCompany;

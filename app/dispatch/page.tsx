@@ -10,6 +10,7 @@ import {
   Truck,
   MapPin,
   Calendar,
+  TrendingUp,
 } from "lucide-react";
 import { DeliveryChallan, TaxInvoice } from "@/lib/types";
 import { formatIndianCurrency, formatDateIndian } from "@/lib/utils";
@@ -77,13 +78,23 @@ export default function DispatchListPage() {
           </p>
         </div>
 
-        <Link
-          href="/dispatch/new"
-          className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 text-xs font-semibold hover:opacity-90 transition-opacity shadow-sm w-full sm:w-auto"
-        >
-          <Plus className="h-4 w-4" />
-          <span>Create New Dispatch</span>
-        </Link>
+        <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+          <Link
+            href="/finance"
+            className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800 text-xs font-semibold transition-colors shadow-xs flex-1 sm:flex-none"
+          >
+            <TrendingUp className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+            <span>Finance Dashboard</span>
+          </Link>
+
+          <Link
+            href="/dispatch/new"
+            className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 text-xs font-semibold hover:opacity-90 transition-opacity shadow-sm flex-1 sm:flex-none"
+          >
+            <Plus className="h-4 w-4" />
+            <span>Create New Dispatch</span>
+          </Link>
+        </div>
       </div>
 
       {/* Search and Summary */}

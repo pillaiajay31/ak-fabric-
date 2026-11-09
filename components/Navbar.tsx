@@ -18,6 +18,7 @@ import {
   ShieldCheck,
   LogOut,
   User as UserIcon,
+  Receipt,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "./AuthProvider";
@@ -73,8 +74,16 @@ const allNavSections: NavSection[] = [
   {
     title: "Finance",
     key: "finance",
-    isActive: (pathname) => pathname.startsWith("/dispatch"),
+    isActive: (pathname) =>
+      pathname.startsWith("/finance") || pathname.startsWith("/dispatch"),
     items: [
+      {
+        name: "Finance Dashboard",
+        href: "/finance",
+        icon: Receipt,
+        description: "Month-to-date revenue, GST & invoice totals",
+        permissionKey: "financeView",
+      },
       {
         name: "Dispatch & Invoices",
         href: "/dispatch",

@@ -45,9 +45,9 @@ export function MobileBottomNav() {
     },
     {
       name: "Finance",
-      href: "/dispatch",
+      href: "/finance",
       icon: FileSpreadsheet,
-      isActive: (p: string) => p.startsWith("/dispatch"),
+      isActive: (p: string) => p.startsWith("/finance") || p.startsWith("/dispatch"),
       visible: hasPermission("financeView"),
     },
     {
